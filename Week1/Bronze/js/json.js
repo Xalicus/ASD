@@ -1,8 +1,8 @@
 /*
 Author: Kevin Ward
-Class: MIU1208
-Name: Project 4
-Date: 08-23-2012
+Class: ASD1210
+Name: Project 1
+Date: 09-27-2012
 */
 
 var json = {
