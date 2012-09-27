@@ -7,40 +7,42 @@ Date: 09-27-2012
 
 $("#home").on("pageinit", function(){
 
+	$("#petsearchbrowse").css("backgroundColor", "darkblue");
+	
 	// Home page code goes here.
-	console.log( $("header nav")
+	$("header nav")
 		.slideUp()
 		.slideDown()
-	); // jQuery Factory
+	;
 });
 
 
 		
 $('#addItem').on('pageinit', function(){
 
-		var myForm = $("#petForm"),
-			aierrorsLink = $("#aierrorsLink")
-			;
-		
-		    myForm.validate({
-			invalidHandler: function(form, validator) {
-				aierrorsLink.click();
-				//console.log(validator.submitted);
-				var html = '';
-				for(var key in validator.submitted) {
-					var label = $('label[for^="' + key + '"]').not('generated');
-					var legend = label.closest('fieldset').find('ui-controlgroup-label');
-					var fieldName = legend.length ? legend.text() : label.text();
-					html += '<li>' + fieldName + '</li>';
-				};
-				$("#addItemErrors ul").html(html);
-				
-			},
-			submitHandler: function() {
-		var data = myForm.serializeArray();
-			storeData(key);
-		}
-	});
+	var myForm = $("#petForm"),
+		aierrorsLink = $("#aierrorsLink")
+		;
+	
+		myForm.validate({
+		invalidHandler: function(form, validator) {
+			aierrorsLink.click();
+			//console.log(validator.submitted);
+			var html = '';
+			for(var key in validator.submitted) {
+				var label = $('label[for^="' + key + '"]').not('generated');
+				var legend = label.closest('fieldset').find('ui-controlgroup-label');
+				var fieldName = legend.length ? legend.text() : label.text();
+				html += '<li>' + fieldName + '</li>';
+			};
+			$("#addItemErrors ul").html(html);
+			
+		},
+		submitHandler: function() {
+	var data = myForm.serializeArray();
+		storeData(key);
+	}
+});
 
 
 // $("#birthDate").datepicker();
