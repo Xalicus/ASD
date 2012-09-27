@@ -41,6 +41,10 @@ $('#addItem').on('pageinit', function(){
 			storeData(key);
 		}
 	});
+
+
+// $("#birthDate").datepicker();
+
 	
 $("#petForm").validate({
 	rules: {
