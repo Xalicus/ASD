@@ -5,10 +5,16 @@ Name: Project 1
 Date: 09-27-2012
 */
 
-
 $("#home").on("pageinit", function(){
-	//code needed for home page goes here
-});	
+
+	// Home page code goes here.
+	console.log( $("header nav")
+		.slideUp()
+		.slideDown()
+	); // jQuery Factory
+});
+
+
 		
 $('#addItem').on('pageinit', function(){
 
@@ -78,6 +84,9 @@ $("#petForm").validate({
 		};
 		selectLi.appendChild(makeSelect);
 	};*/
+	
+	
+	// $("input:radio:selected")
 	
 	// Find the value of selected radio button.
 	var getSelectedRadio = function() {

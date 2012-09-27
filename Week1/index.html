@@ -13,7 +13,7 @@ Date: 09-27-2012
 	<meta name="description" content="Kev's KoolPetsDex Mobile Web App." />
 	<meta name="keywords" content="html5, mobile development, Full Sail University, pets, apps" />
 		
-	<title>Kev's KoolPetsDex Gold App</title>
+	<title>Kev's KoolPetsDex</title>
 	
 	<!--  Mobile viewport optimized: j.mp/bplateviewport -->
 	<meta name="HandheldFriendly" content="True">
@@ -35,8 +35,7 @@ Date: 09-27-2012
 	<!-- Home Page -->
 	<div data-role="page" id="home" data-theme="b">
 	<!-- Header -->
-		<div data-role="header" data-theme="b">
-		<header>
+		<header data-role="header" data-theme="b">
 			<nav id="addPetFeature">
 				<h1><a href="#home"><img src="images/img.png" width="40" height="50" title="My Joker Face." /></a>
 				Kev's KoolPetsDex</h1>
@@ -44,7 +43,6 @@ Date: 09-27-2012
 				<p><a href="#addItem" id="addPet" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true">ADD A KOOLPET NOW!</a></p>
 			</nav>
 		</header>
-		</div>
 		<!-- Main body of page -->
 		<div data-role="content" id="petsearchbrowse" data-theme="b">
 			
@@ -110,8 +108,7 @@ Date: 09-27-2012
 		</div> <!-- end content -->
 		
 		<!-- Footer -->
-		<div data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
-		<footer>
+		<footer data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
 			<nav id="navi">
 			<div data-role="navbar" data-theme="b">
 				<ul>
@@ -123,8 +120,7 @@ Date: 09-27-2012
 			</div><!-- /navbar -->
 			<small>&copy; 2012 Kevin Ward, All Rights Reserved.</small>
 			</nav>
-		</footer>
-		</div> <!-- end footer -->
+		</footer> <!-- end footer -->
 	</div>
 	<!-- End Home Page -->
 	
@@ -132,14 +128,12 @@ Date: 09-27-2012
 	<!-- Add Item Page -->
 	<div data-role="page" id="addItem" data-add-back-btn="true" data-theme="b">
 	
-		<div data-role="header" data-theme="b">
-		<header>
+		<header data-role="header" data-theme="b">
 			<nav id="addPetFeature">
 				<h2><a href="#home"><img src="images/img.png" width="40" height="50" title="My Joker Face." /></a>
 				Add a KoolPet!</h2>
 			</nav>
 		</header>
-		</div>
 
 		<!-- Main body of page -->
 		<div data-role="content" id="petsForm" data-theme="b">
@@ -249,8 +243,7 @@ Date: 09-27-2012
 		</div> <!-- end koolpetform -->
 		</div> <!-- end content -->
 
-		<div data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
-		<footer>
+		<footer data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
 			<nav id="navi">
 			<div data-role="navbar" data-theme="b">
 				<ul>
@@ -262,22 +255,19 @@ Date: 09-27-2012
 			</div><!-- /navbar -->
 			<small>&copy; 2012 Kevin Ward, All Rights Reserved.</small>
 			</nav>
-		</footer>
-		</div> <!-- end footer -->
+		</footer> <!-- end footer -->
 	</div>
 	<!-- End Add Item Page -->
 	
 	
 	<!-- Show Item Page -->
 	<div data-role="page" id="showItem" data-add-back-btn="true" data-theme="b">
-		<div data-role="header" data-theme="b">
-		<header>
+		<header data-role="header" data-theme="b">
 			<nav id="addPetFeature">
 				<h2><a href="#home"><img src="images/img.png" width="40" height="50" title="My Joker Face." /></a>
 				Show KoolPets!</h2>
 			</nav>
-		</header>
-		</div> <!-- end header -->
+		</header> <!-- end header -->
 		
 		<div data-role="content" id="petsForm" data-theme="b">
 		
@@ -303,9 +293,8 @@ Date: 09-27-2012
 			</div> <!-- end items -->
 			
 		</div> <!-- end content -->
-		
-		<div data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
-		<footer>
+
+		<footer data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
 			<nav id="navi">
 			<div data-role="navbar" data-theme="b">
 				<ul>
@@ -317,8 +306,7 @@ Date: 09-27-2012
 			</div><!-- /navbar -->
 			<small>&copy; 2012 Kevin Ward, All Rights Reserved.</small>
 			</nav>
-		</footer>
-		</div> <!-- end footer -->
+		</footer> <!-- end footer -->
 		
 	</div>
 	<!-- End Show Item Page -->
@@ -326,14 +314,12 @@ Date: 09-27-2012
 	
 	<!-- Info Page -->
 	<div data-role="page" id="info" data-add-back-btn="true" data-theme="b">
-		<div data-role="header" data-theme="b">
-		<header>
+		<header data-role="header" data-theme="b">
 			<nav id="addPetFeature">
 				<h1><a href="index.html"><img src="images/img.png" width="40" height="50" title="My Joker Face." /></a>
 				About KoolPetsDex</h1>
 			</nav>
-		</header>
-		</div> <!-- end header -->
+		</header> <!-- end header -->
 		
 		<!-- Main body of page -->
 		<div data-role="content" id="petsearchbrowse" data-theme="b">
@@ -356,18 +342,15 @@ Date: 09-27-2012
 				<div data-role="fieldcontain">
 				<h4>Links</h4>
 				<p><a href="#home" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Home</a>
-				<a href="../Gold/index.html" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Gold App</a>
-				<a href="../Bronze/index.html" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Bronze App</a><br />
-				<a href="http://xalicus.github.com/MIU-Projects/Week4/Gold/" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">GH Pages-Gold App</a>
-				<a href="http://xalicus.github.com/MIU-Projects/Week4/Bronze/" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">GH Pages-Bronze App</a>
+				<a href="../Week1/index.html" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">ASD Mobile App</a>
+				<a href="http://xalicus.github.com/ASD/Week1/index.html" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">ASD GH Pages App</a>
 				</p>
 				</div>
 			</div>
 		</div> <!-- end content -->
 		
 		<!-- Footer -->
-		<div data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
-		<footer>
+		<footer data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
 			<nav id="navi">
 			<div data-role="navbar" data-theme="b">
 				<ul>
@@ -379,8 +362,7 @@ Date: 09-27-2012
 			</div><!-- /navbar -->
 			<small>&copy; 2012 Kevin Ward, All Rights Reserved.</small>
 			</nav>
-		</footer>
-		</div> <!-- end footer -->
+		</footer> <!-- end footer -->
 	</div>
 	<!-- End Info Page -->
 	
@@ -388,14 +370,12 @@ Date: 09-27-2012
 	<!-- News Stream Page -->
 	<!-- Header -->
 	<div data-role="page" id="news" data-add-back-btn="true" data-theme="b">
-		<div data-role="header" data-theme="b">
-		<header>
+		<header data-role="header" data-theme="b">
 			<nav id="addPetFeature">
 				<h1><a href="index.html"><img src="images/img.png" width="40" height="50" title="My Joker Face." /></a>
 				KoolPetsDex News Stream</h1>
 			</nav>
-		</header>
-		</div> <!-- end header -->
+		</header> <!-- end header -->
 		
 		<!-- Main body of page -->
 		<div data-role="content" id="petsearchbrowse" data-theme="b">
@@ -437,8 +417,7 @@ Date: 09-27-2012
 		</div> <!-- end content -->
 		
 	<!-- Footer -->
-		<div data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
-		<footer>
+		<footer data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
 			<nav id="navi">
 			<div data-role="navbar" data-theme="b">
 				<ul>
@@ -450,8 +429,7 @@ Date: 09-27-2012
 			</div><!-- /navbar -->
 			<small>&copy; 2012 Kevin Ward, All Rights Reserved.</small>
 			</nav>
-		</footer>
-		</div> <!-- end footer -->
+		</footer> <!-- end footer -->
 	</div>
 	<!-- End News Stream Page -->
 	
@@ -459,14 +437,12 @@ Date: 09-27-2012
 	<!-- Under Construction Page -->
 	<div data-role="page" id="cs" data-add-back-btn="true" data-theme="b">
 		<!-- Header -->
-		<div data-role="header" data-theme="b">
-		<header>
+		<header data-role="header" data-theme="b">
 			<nav id="addPetFeature">
 				<h1><a href="index.html"><img src="images/img.png" width="40" height="50" title="My Joker Face." /></a>
 				Under Construction</h1>
 			</nav>
-		</header>
-		</div> <!-- end header -->
+		</header> <!-- end header -->
 		
 		<!-- Main body of page -->
 		<div data-role="content" id="petsearchbrowse" data-theme="b">
@@ -479,8 +455,7 @@ Date: 09-27-2012
 		</div> <!-- end content -->
 		
 		<!-- Footer -->
-		<div data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
-		<footer>
+		<footer data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
 			<nav id="navi">
 			<div data-role="navbar" data-theme="b">
 				<ul>
@@ -492,8 +467,7 @@ Date: 09-27-2012
 			</div><!-- /navbar -->
 			<small>&copy; 2012 Kevin Ward, All Rights Reserved.</small>
 			</nav>
-		</footer>
-		</div> <!-- end footer -->
+		</footer> <!-- end footer -->
 	</div>
 	<!-- End Under Construction Page -->
 	
@@ -501,14 +475,12 @@ Date: 09-27-2012
 	<!-- Add Item Errors Page -->
 	<div data-role="dialog" id="addItemErrors" data-theme="b">
 		<!-- Header -->
-		<div data-role="header" data-theme="b">
-		<header>
+		<header data-role="header" data-theme="b">
 			<nav id="addPetFeature">
 				<h1><a href="index.html"><img src="images/img.png" width="40" height="50" title="My Joker Face." /></a>
 				I am Error.</h1>
 			</nav>
-		</header>
-		</div> <!-- end header -->
+		</header> <!-- end header -->
 		
 		<!-- Main body of page -->
 		<div data-role="content" id="petsearchbrowse" data-theme="b">
@@ -521,7 +493,7 @@ Date: 09-27-2012
 	
 
 	<!-- JavaScript under here -->
-	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
 	<script src="js/libs/jquery.validate.min.js" type="text/javascript"></script>
 	<script src="js/json.js" type="text/javascript"></script>

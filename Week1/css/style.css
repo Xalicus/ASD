@@ -130,9 +130,9 @@ div#searchPets {
 div#browsePets {
 	font-family: "Times New Roman", Times, serif;
 	margin: 1px 5px;
-	border: 1px solid #FF6600;
+	/*border: 1px solid #FF6600;*/
 	padding: 3px;
-	background: #CCFFFF;
+	/*background: #CCFFFF;*/
 	color: lightblue;
 }
 
