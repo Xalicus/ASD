@@ -1,9 +1,9 @@
 
 /*
 Author: Kevin Ward
-Class: MIU1208
-Name: Project 4
-Date: 08-23-2012
+Class: ASD1210
+Name: Project 1
+Date: 09-27-2012
 */
 
 #charset "utf-8";
@@ -130,9 +130,9 @@ div#searchPets {
 div#browsePets {
 	font-family: "Times New Roman", Times, serif;
 	margin: 1px 5px;
-	border: 1px solid #FF6600;
+	/*border: 1px solid #FF6600;*/
 	padding: 3px;
-	background: #CCFFFF;
+	/*background: #CCFFFF;*/
 	color: lightblue;
 }
 
