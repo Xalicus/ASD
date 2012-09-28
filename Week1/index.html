@@ -162,6 +162,7 @@ Date: 09-27-2012
 						
 						<div data-role="fieldcontain" name="petsType" id="petsType">
 							<label for="petsType">KoolPet Type: *</label>
+							<br />
 								<select id="petGroups" class="required">
 									<option data-placeholder="true">Choose A Pet Group:</option>
 									<option value="Birds">Birds</option>
@@ -176,12 +177,14 @@ Date: 09-27-2012
 						
 						<div data-role="fieldcontain">
 							<label for="petName">KoolPet's Name: *</label>
+							<br />
 								<input type="text" name="petName" id="petName" value="" class="required" />
 								<p id="greyText">Example: Fluffy</p>
 						</div>
 						
 						<div data-role="fieldcontain">
 							<label for="petEmail">KoolPet Email: *</label>
+							<br />
 								<input type="email" name="petEmail" id="petEmail" value="" class="required" email />
 								<p id="greyText">Example: example@petmail.com</p>
 						</div>
@@ -189,6 +192,7 @@ Date: 09-27-2012
 						<div data-role="fieldcontain">
 							<fieldset data-role="controlgroup" data-type="horizontal">
 								<legend for="genderValue">Gender: *</legend>
+								<br />
 								<input type="radio" value="Male" name="genderValue" id="male" checked="checked" class="required" />
 								<label for="male">Male</label>
 								<input type="radio" value="Female" name="genderValue" id="female" />
@@ -208,6 +212,7 @@ Date: 09-27-2012
 						
 						<div data-role="fieldcontain">
 							<label for="favePet">Favorite KoolPet:</label>
+							<br />
 								<select name="favePet" id="favePet" data-role="slider">
 									<option value="off">No</option>
 									<option value="on">Yes</option>
@@ -216,17 +221,21 @@ Date: 09-27-2012
 						
 						 <div data-role="fieldcontain">
 							<label for="birthDate">Date of Birth: *</label>
-							<input type="date" class="left" name="birthDate" id="birthDate" />
+							<br />
+							<input type="date" class="ignoreValidation" name="birthDate" id="birthDate" value="" />
 							<!-- min="01-01-1900" max="12-31-2099" value="07-04-2012" --> 
 						</div>
 						
 						<div data-role="fieldcontain">
 							<label for="koolness">Koolness Factor:</label>
+							<br />
 							<input type="range" name="koolness" id="koolness" data-highlight="true" min="0" max="100" value="50" step="5" data-theme="b" />
 						</div>
 						
 						<div data-role="fieldcontain">
-							<label for="comments">Comments:</label><textarea name="comments" id="comments">Place comments here...</textarea>
+							<label for="comments">Comments:</label>
+							<br />
+							<textarea name="comments" id="comments">Place comments here...</textarea>
 						</div>
 					</ul>
 				<div data-role="fieldcontain">
@@ -508,6 +517,21 @@ Date: 09-27-2012
 				<li>Test</li>
 			</ul>
 		</div> <!-- end content -->
+		
+		<!-- Footer -->
+		<footer data-role="footer" data-position="fixed" data-theme="b" data-id="navfooter">
+			<nav id="navi">
+			<div data-role="navbar" data-theme="b">
+				<ul>
+					<li><a href="#home" data-role="button" data-ajax="false">Home</a></li>
+					<li><a href="#addItem" data-role="button" data-ajax="false">Add Pet</a></li>
+					<li><a href="#info" data-role="button" data-ajax="false">About Me</a></li>
+					<li><a href="#news" data-role="button" data-ajax="false">News</a></li>
+				</ul>
+			</div><!-- /navbar -->
+			<small>&copy; 2012 Kevin Ward, All Rights Reserved.</small>
+			</nav>
+		</footer> <!-- end footer -->
 	</div>
 	<!-- End Add Item Errors Page -->
 	

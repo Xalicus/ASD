@@ -6,58 +6,103 @@ Date: 09-27-2012
 */
 
 $("#home").on("pageinit", function(){
-
-	$("#petsearchbrowse").css("backgroundColor", "darkblue");
 	
 	// Home page code goes here.
 	$("header nav")
 		.slideUp()
 		.slideDown()
 	;
-});
+	
+	/*$('<a href="#">Link</a>')
+		.appendTo('#nav')
+		.wrap('<p />')
+		.bind('click', function(){
+			console.log('nav event!');
+			$(this).parent().addClass('active')
+			return false;
+		})
+	;*/
+	
+	//mouseenter mouseleave
+	//focusin focusout
+	
+}); // End code for home page.
 
 
 		
 $('#addItem').on('pageinit', function(){
 
-	var myForm = $("#petForm"),
-		aierrorsLink = $("#aierrorsLink")
+	$('#petsForm div').on('click', function(e){
+		console.log(e);
+	});
+
+	$('#koolness').slider("refresh");
+	$('#petName').val("Enter KoolPet Name here!");
+	$('#petName').on('click', function() {
+		$('#petName').val("");
+	});
+
+	var myForm = $('#petForm'),
+		aierrorsLink = $('#aierrorsLink')
 		;
 	
 		myForm.validate({
-		invalidHandler: function(form, validator) {
-			aierrorsLink.click();
-			//console.log(validator.submitted);
-			var html = '';
-			for(var key in validator.submitted) {
-				var label = $('label[for^="' + key + '"]').not('generated');
-				var legend = label.closest('fieldset').find('ui-controlgroup-label');
-				var fieldName = legend.length ? legend.text() : label.text();
-				html += '<li>' + fieldName + '</li>';
+			ignore: '.ignoreValidation',
+			invalidHandler: function(form, validator) {
+				aierrorsLink.click();
+				var html = '';
+				for(var key in validator.submitted) {
+					var label = $('label[for^="' + key + '"]').not('generated');
+					var legend = label.closest('fieldset').find('ui-controlgroup-label');
+					var fieldName = legend.length ? legend.text() : label.text();
+					html += '<li>' + fieldName + '</li>';
+				};
+				$("#addItemErrors ul").html(html);
+				
+			},
+			submitHandler: function() {
+				var data = myForm.serializeArray();
+					storeData(key);
 			};
-			$("#addItemErrors ul").html(html);
 			
-		},
-		submitHandler: function() {
-	var data = myForm.serializeArray();
-		storeData(key);
-	}
-});
+			var dateToday = function() {
+				var today = new Date();
+				var day = today.getDate();
+				var month = today.getMonth() + 1;
+				var year = today.getFullYear();
+				
+				if (day < 10) {
+					day = day + "0";
+				}
+				
+				if (month < 10) {
+					month = "0" + month;
+				}
+				
+				today = month + "-" + day + "-" + year;
+				$('#birthDate').val(today);
+			};
+				dateToday();
+			
+			$('#reset').on('click', function() {
+				// this is to reset the form
+				resetPF();
+				location.reload('#addItem');
+			});
+			var resetPF = function() {
+				$('#kool1').attr('checked', false);
+				$('#petName').val("");
+				$('#petGroups').val("");
+				$('#petEmail').val("");
+				$('#male').attr('checked', true);
+				$('#female').attr('checked', false);
+				$('#favePet').attr('checked', false);
+				dateToday();
+				$('#koolness').val(25);
+				$('#comments').val("");
+			};
+		});
 
-
-// $("#birthDate").datepicker();
-
-	
-$("#petForm").validate({
-	rules: {
-		birthDate: {
-			required: true,
-			dateISO: true
-		}
-	}
-});
-	
-	
 	//any other code needed for addItem page goes here
 
 
@@ -68,129 +113,32 @@ $("#petForm").validate({
 	};
 
 	// My Variables for the functions
-	var petGroups = ["--Choose A Pet Group--", "Birds", "Cats", "Dogs", "Farm_Animals", 
-					"Mythical", "Reptiles", "Rodents"];
 	var	genderValue;
 	var	faveValue = "No";
-	var	errMsg = gebi("errors");
-
-	// Create select field element and populate with options.
-/*	var makeCats = function() {
-		var formTag = document.getElementsByTagName("petForm"),
-			selectLi = gebi("petsType"),
-			makeSelect = document.createElement("select");
-			makeSelect.setAttribute("id", "petGroups");
-			makeSelect.setAttribute("class", "required");
-		for (var i=0, j=petGroups.length; i<j; i++) {
-			var makeOption = document.createElement("option");
-			var optTxt = petGroups[i];
-			makeOption.setAttribute("value", optTxt);
-			makeOption.innerHTML = optTxt;
-			makeSelect.appendChild(makeOption);
-		};
-		selectLi.appendChild(makeSelect);
-	};*/
-	
-	
-	// $("input:radio:selected")
-	
-	// Find the value of selected radio button.
-	var getSelectedRadio = function() {
-		var radio = document.forms[0].genderValue;
-		for (var i=0; i<radio.length; i++) {
-			if (radio[i].checked) {
-				genderValue = radio[i].value;
-			};
-		};
-	};
-	
-	// Finds the value of the Checkbox
-	var getCheckboxValue = function(){
-		if (gebi("favePet").checked) {
-			faveValue = gebi("favePet").value;
-		} else {
-			faveValue = "Off";
-		};
-	};
+	var	errMsg = $("#errors");
 	
 	var toggleControls = function(n) {
 		switch(n) {
 			case "on":
-				gebi("petForm").style.display = "none";
-				gebi("clearData").style.display = "inline";
-				gebi("showData").style.display = "none";
-				gebi("addNew").style.display = "inline";
-				gebi("items").style.display = "inline";
+				$("#petForm").style.display = "none";
+				$("#clearData").style.display = "inline";
+				$("#showData").style.display = "none";
+				$("#addNew").style.display = "inline";
+				$("#items").style.display = "inline";
 				break;
 			case "off":
-				gebi("petForm").style.display = "block";
-				gebi("clearData").style.display = "inline";
-				gebi("showData").style.display = "inline";
-				gebi("addNew").style.display = "none";
-				gebi("items").style.display = "none";
+				$("#petForm").style.display = "block";
+				$("#clearData").style.display = "inline";
+				$("#showData").style.display = "inline";
+				$("#addNew").style.display = "none";
+				$("#items").style.display = "none";
 				break;
 			default:
 				return false;
 		};
 	};
-	
-	
-// My Validate Function
-/*	var validate = function(e) {
-		// Define the elements we want to check
-		var getPetGroups = gebi("petGroups");
-		var getPetName = gebi("petName");
-		var getPetEmail = gebi("petEmail");
-		
-		// Resetting Error Messages
-		errMsg.innerHTML = "";
-		getPetGroups.style.border = "1px solid black";
-		getPetName.style.border = "1px solid black";
-		getPetEmail.style.border = "1px solid black";
-		
-		// Get Error Messages
-		var messageArray = [];
-		
-		// Pet Type Validation
-		if (getPetGroups.value === "--Choose A Pet Group--") {
-			var petGroupsError = "Please choose a KoolPet Group!";
-			getPetGroups.style.border = "1px solid red";
-			messageArray.push(petGroupsError);
-		};
-		
-		// Pet Name Validation
-		if (getPetName.value === "") {
-			var petNameError = "Please enter a KoolPet Name!";
-			getPetName.style.border = "1px solid red";
-			messageArray.push(petNameError);
-		};
-		
-		// Email Validation
-		var re = /^\w+([\.\-]?\w+)*@\w+([\.\-]?\w+)*(\.\w{2,3})+$/;
-		var re2 = /^([a-z0-9])([\w\.\-\+])+([a-z0-9])\@((\w)([\w\-]?)+\.)+([a-z]{2,6})$/;
-		if (!(re.exec(getPetEmail.value))) {
-			var petEmailError = "Please enter an email for your KoolPet!";
-			getPetEmail.style.border = "1px solid red";
-			messageArray.push(petEmailError);
-		};
-		
-		// If there were errors, display them on the screen.
-		if (messageArray.length >= 1) {
-			for (var i=0, j=messageArray.length; i < j; i++) {
-				var txt = document.createElement("li");
-				txt.innerHTML = messageArray[i];
-				errMsg.appendChild(txt);
-			};
-			e.preventDefault();
-			return false;
-		} else {
-			// If all is OK, save the data! Send the key value (which came from the editData function).
-			// Remember this key value was passed through the editSubmit event listener as a prop.
-			storeData(this.key);
-		};
-	};*/
-	
 
+// Live Search
 	$(document).ready(function(){
 		$("#filter").keyup(function(){
 	 
@@ -232,11 +180,10 @@ var autoFillData = function (){
 };
 
 // My storeData function
-// var submit = function(key){
 var storeData = function(key){
 	// If there isn't a key, this means this is a brand new item and we need a new key.
 	if (!key) {
-		var id				= Math.floor(Math.random()*1000001);
+		var id				= Math.floor(Math.random()*10000001);
 	} else {
 		// Set the id to the existing key I'm editing so that it will save over the data.
 		// The key is the same key that's been passed along from the editSubmit event handler
@@ -250,18 +197,19 @@ var storeData = function(key){
 	getSelectedRadio();
 	getCheckboxValue();
 	
-	var item				= {};
-		item.petGroups		= ["KoolPet Type:", gebi("petGroups").value];
-		item.petName		= ["KoolPet\'s Name:", gebi("petName").value];
-		item.petEmail		= ["KoolPet Email:", gebi("petEmail").value];
-		item.genderValue	= ["Gender:", genderValue];
-		item.favePet		= ["Favorite KoolPet:", faveValue];
-		item.birthDate		= ["Date of Birth:", gebi("birthDate").value];
-		item.koolness		= ["Koolness Factor:", gebi("koolness").value];
-		item.comments		= ["Comments:", gebi("comments").value];
+	var pet					= {};
+		pet.kool1			= ["What is your Pet? ", $('#kool1').val()];
+		pet.petGroups		= ["KoolPet Type: ", $('#petGroups').val()];
+		pet.petName			= ["KoolPet\'s Name: ", $('#petName').val()];
+		pet.petEmail		= ["KoolPet Email: ", $('#petEmail').val()];
+		pet.genderValue		= ["Gender: ", $('input:radio[name=genderValue]:checked').val()];
+		pet.favePet			= ["Favorite KoolPet: ", $('input:slider[name=favePet]:true').val()];
+		pet.birthDate		= ["Date of Birth: ", $('#birthDate').val()];
+		pet.koolness		= ["Koolness Factor: ", $('#koolness').val()];
+		pet.comments		= ["Comments: ", $('#comments').val()];
 	// Save data into Local Storage: Use Stringify to convert the object to a string.
 	localStorage.setItem(id, JSON.stringify(item));
-	// alert("Pet saved to the KoolPetsDex!");
+	alert("Pet saved to the KoolPetsDex!");
 }; 
 
 // My getData function
@@ -408,16 +356,90 @@ var clearDataStorage = function(){
 	};
 };
 
-// Calling the makeCats function.
-//	makeCats();
-	
 // My Variables
-	var showData = gebi("showData");
+	var showData = $("#showData");
 	showData.addEventListener("click", getData);
-	var clearLink = gebi("clearData");	
+	var clearLink = $("#clearData");	
 	clearLink.addEventListener("click", clearDataStorage);
-	var saveData = gebi("submit");
+	var saveData = $("#submit");
 	saveData.addEventListener("click", storeData);
 
 
-});
+}); // End code for page.
+
+
+$("#showItem").on("pageinit", function(){
+	// Page code goes here.
+	$("header nav")
+		.slideUp()
+		.slideDown()
+	;
+	
+	function searchInput() {
+		if ($('#searchField').val() == "") {
+			$('#searchResults').html("");
+		}
+	}
+
+var search = function() {
+	var getInput = $('#searchField').val();
+	var getCat = $().val();
+	var error = true;
+	var match;
+	
+	if (getInput == "") {
+		alert("Please input a search term.");
+		return;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+};
+	
+}); // End code for page.
+
+
+$("#info").on("pageinit", function(){
+	// Page code goes here.
+	$("header nav")
+		.slideUp()
+		.slideDown()
+	;	
+}); // End code for page.
+
+
+$("#news").on("pageinit", function(){
+	// Page code goes here.
+	$("header nav")
+		.slideUp()
+		.slideDown()
+	;	
+}); // End code for page.
+
+
+$("#cs").on("pageinit", function(){
+	// Page code goes here.
+	$("header nav")
+		.slideUp()
+		.slideDown()
+	;	
+}); // End code for page.
+
+
+$("#addItemErrors").on("pageinit", function(){
+	// Page code goes here.
+	$("header nav")
+		.slideUp()
+		.slideDown()
+	;	
+}); // End code for page.
