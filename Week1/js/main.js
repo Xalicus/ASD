@@ -392,18 +392,6 @@ var search = function() {
 		return;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
 };
 	
 }); // End code for page.
