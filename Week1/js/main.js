@@ -63,7 +63,7 @@ $('#addItem').on('pageinit', function(){
 			submitHandler: function() {
 				var data = myForm.serializeArray();
 					storeData(key);
-			};
+			},
 			
 			var dateToday = function() {
 				var today = new Date();
@@ -238,7 +238,7 @@ var getData = function(){
 		editLink.href = "#addItem";
 		editLink.key = key;
 		var editText = "Edit KoolPet";
-		editLink.addEventListener("click", editItem);
+		editLink.on("click", editItem);
 		editLink.innerHTML = editText;
 		linksLi.appendChild(editLink);
 
@@ -252,7 +252,7 @@ var getData = function(){
 		deleteLink.href = "#addItem";
 		deleteLink.key = key;
 		var deleteText = "Release KoolPet";
-		deleteLink.addEventListener("click", deleteItem);
+		deleteLink.on("click", deleteItem);
 		deleteLink.innerHTML = deleteText;
 		linksLi.appendChild(deleteLink);
 	};
@@ -262,10 +262,10 @@ var getData = function(){
 	// makeDiv.setAttribute("id", "items"); // Found out I don't need this line anymore.
 	var makeList = document.createElement("ul");
 	// makeDiv.appendChild(makeList); // Modified this line to work with my current code.
-	gebi("items").appendChild(makeList);
+	$("items").appendChild(makeList);
 	// This code should add the data to my page when I press show data.
 	document.body.appendChild(makeDiv);
-	gebi("items").style.display = "block";
+	$("items").style.display = "block";
 	for (var i=0, len=localStorage.length; i<len; i++) {
 		var makeLi = document.createElement("li");
 		var linksLi = document.createElement("div");
@@ -299,9 +299,9 @@ var getData = function(){
 		toggleControls("off");
 		
 		// Populate the form fields with current localStorage values.
-		gebi("petGroups").value = item.petGroups[1];
-		gebi("petName").value = item.petName[1];
-		gebi("petEmail").value = item.petEmail[1];
+		$("petGroups").val() = item.petGroups[1];
+		$("petName").val() = item.petName[1];
+		$("petEmail").val() = item.petEmail[1];
 		var radios = document.forms[0].genderValue;
 		for (var i=0; i<radios.length; i++) {
 			if (radios[i].value == "Male" && item.genderValue[1] == "Male") {
@@ -311,21 +311,21 @@ var getData = function(){
 			};
 		};
 		if (item.favePet[1] == "Yes") {
-			gebi("favePet").setAttribute("value", "On");
+			$("favePet").attr("value", "On");
 		};
-		gebi("birthDate").value = item.birthDate[1];
-		gebi("koolness").value = item.koolness[1];
-		gebi("comments").value = item.comments[1];
+		$("birthDate").val() = item.birthDate[1];
+		$("koolness").val() = item.koolness[1];
+		$("comments").val() = item.comments[1];
 		
 		// Remove the initial listener from the input "save pet" button.
 		storeData.removeEventListener("click", submit);
 		// Change SaveData button Value to Edit Button
-		gebi("submit").value = "Edit KoolPet";
-		var editSubmit = gebi("submit");
+		$("submit").val() = "Edit KoolPet";
+		var editSubmit = $("submit");
 		
 		// Save the key value established in this function as a prop of the editSubmit event
 		// so we can use that value when we save the data we edited.
-		editSubmit.addEventListener("click", submit);
+		editSubmit.on("click", submit);
 		editSubmit.key = this.key;
 	};
 
@@ -358,11 +358,11 @@ var clearDataStorage = function(){
 
 // My Variables
 	var showData = $("#showData");
-	showData.addEventListener("click", getData);
+	showData.on("click", getData);
 	var clearLink = $("#clearData");	
-	clearLink.addEventListener("click", clearDataStorage);
+	clearLink.on("click", clearDataStorage);
 	var saveData = $("#submit");
-	saveData.addEventListener("click", storeData);
+	saveData.on("click", storeData);
 
 
 }); // End code for page.
