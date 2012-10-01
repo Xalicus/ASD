@@ -65,7 +65,7 @@ $('#addItem').on('pageinit', function(){
 					storeData(key);
 			},
 			
-			var dateToday = function() {
+			dateToday: function() {
 				var today = new Date();
 				var day = today.getDate();
 				var month = today.getMonth() + 1;
@@ -73,16 +73,16 @@ $('#addItem').on('pageinit', function(){
 				
 				if (day < 10) {
 					day = day + "0";
-				}
+				},
 				
 				if (month < 10) {
 					month = "0" + month;
-				}
+				},
 				
 				today = month + "-" + day + "-" + year;
 				$('#birthDate').val(today);
 			};
-				dateToday();
+				//dateToday();
 			
 			$('#reset').on('click', function() {
 				// this is to reset the form
@@ -167,8 +167,8 @@ var storeData = function(key){
 	// Gather round ye olde form field values, and store in ye olde objects.
 	// Object props contain array with the form label and input value.
 	
-	getSelectedRadio();
-	getCheckboxValue();
+	//getSelectedRadio();
+	//getCheckboxValue();
 	
 	var pet					= {};
 		pet.kool1			= ["What is your Pet? ", $('#kool1').val()];
@@ -272,9 +272,9 @@ var getData = function(){
 		toggleControls("off");
 		
 		// Populate the form fields with current localStorage values.
-		$("petGroups").val() = item.petGroups[1];
-		$("petName").val() = item.petName[1];
-		$("petEmail").val() = item.petEmail[1];
+		$("petGroups").value = item.petGroups[1].val();
+		$("petName").value = item.petName[1];
+		$("petEmail").value = item.petEmail[1];
 		var radios = document.forms[0].genderValue;
 		for (var i=0; i<radios.length; i++) {
 			if (radios[i].value == "Male" && item.genderValue[1] == "Male") {
@@ -286,14 +286,14 @@ var getData = function(){
 		if (item.favePet[1] == "Yes") {
 			$("favePet").attr("value", "On");
 		};
-		$("birthDate").val() = item.birthDate[1];
-		$("koolness").val() = item.koolness[1];
-		$("comments").val() = item.comments[1];
+		$("birthDate").value = item.birthDate[1];
+		$("koolness").value = item.koolness[1];
+		$("comments").value = item.comments[1];
 		
 		// Remove the initial listener from the input "save pet" button.
-		storeData.removeEventListener("click", submit);
+		storeData.off("click", submit);
 		// Change SaveData button Value to Edit Button
-		$("submit").val() = "Edit KoolPet";
+		$("submit").value = "Edit KoolPet";
 		var editSubmit = $("submit");
 		
 		// Save the key value established in this function as a prop of the editSubmit event
