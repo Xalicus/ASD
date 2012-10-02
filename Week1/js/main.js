@@ -73,11 +73,11 @@ $('#addItem').on('pageinit', function(){
 				
 				if (day < 10) {
 					day = day + "0";
-				},
+				}
 				
 				if (month < 10) {
 					month = "0" + month;
-				},
+				}
 				
 				today = month + "-" + day + "-" + year;
 				$('#birthDate').val(today);
@@ -199,7 +199,7 @@ var getData = function(){
 		var imgLi = document.createElement("div");
 		makeSubList.appendChild(imgLi);
 		var newImg = document.createElement("img");
-		var setSrc = newImg.setAttribute("src", "images/" + catName + ".png");
+		var setSrc = newImg.attr("src", "images/" + catName + ".png");
 		imgLi.appendChild(newImg);
 	};
 
@@ -232,7 +232,7 @@ var getData = function(){
 	
 	// This is supposed to write data from Local Storage back to the browser.
 	var makeDiv = document.createElement("div");
-	// makeDiv.setAttribute("id", "items"); // Found out I don't need this line anymore.
+	// makeDiv.attr("id", "items"); // Found out I don't need this line anymore.
 	var makeList = document.createElement("ul");
 	// makeDiv.appendChild(makeList); // Modified this line to work with my current code.
 	$("items").appendChild(makeList);
@@ -278,9 +278,9 @@ var getData = function(){
 		var radios = document.forms[0].genderValue;
 		for (var i=0; i<radios.length; i++) {
 			if (radios[i].value == "Male" && item.genderValue[1] == "Male") {
-				radios[i].setAttribute("checked", "checked");
+				radios[i].attr("checked", "checked");
 			} else if (radios[i].value == "Female" && item.genderValue[1] == "Female") {
-				radios[i].setAttribute("checked", "checked");
+				radios[i].attr("checked", "checked");
 			};
 		};
 		if (item.favePet[1] == "Yes") {
