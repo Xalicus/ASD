@@ -24,6 +24,31 @@ $("#home").on("pageinit", function(){
 	//mouseenter mouseleave
 	//focusin focusout
 	
+	/*$showJSON.ajax({
+		url			: "../data/data.json",
+		type		: "GET",
+		dataType	: "json",
+		success		: function(data, status) {
+			console.log(status, data);
+		}
+    });
+    $showXML.ajax({
+		url			: "../data/data.xml",
+		type		: "GET",
+		dataType 	: function(data, status) {
+			console.log(status, data);
+		}
+	});
+	$showCSV.ajax({
+		url			: "../data/data.csv",
+		type		: "GET",
+		dataType	: function(data, status) {
+			console.log(status, data);
+		}
+	});
+	*/
+	
+	
 }); // End code for home page.
 
 
@@ -186,6 +211,7 @@ var storeData = function(key){
 		pet.comments		= ["Comments: ", $('#comments').val()];
 	// Save data into Local Storage: Use Stringify to convert the object to a string.
 	localStorage.setItem(id, JSON.stringify(item));
+	console.log(pet.val());
 	alert("Pet saved to the KoolPetsDex!");
 }; 
 
