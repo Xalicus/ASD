@@ -1,8 +1,6 @@
 /*
 Author: Kevin Ward
 Class: ASD1210
-Name: Project 1
-Date: 09-27-2012
 */
 
 $("#home").on("pageinit", function(){
@@ -81,10 +79,10 @@ $('#addItem').on('pageinit', function(){
 				
 				today = month + "-" + day + "-" + year;
 				$('#birthDate').val(today);
-			};
+			},
 				//dateToday();
 			
-			$('#reset').on('click', function() {
+			/*$('#reset').on('click', function() {
 				// this is to reset the form
 				resetPF();
 				location.reload('#addItem');
@@ -100,7 +98,7 @@ $('#addItem').on('pageinit', function(){
 				dateToday();
 				$('#koolness').val(25);
 				$('#comments').val("");
-			};
+			};*/
 		});
 
 	//any other code needed for addItem page goes here
@@ -124,6 +122,9 @@ $('#addItem').on('pageinit', function(){
 				$("#clearData").style.display = "inline";
 				$("#showData").style.display = "none";
 				$("#addNew").style.display = "inline";
+				$("#showJSON").style.display = "inline";
+				$("#showXML").style.display = "inline";
+				$("#showCSV").style.display = "inline";
 				$("#items").style.display = "inline";
 				break;
 			case "off":
@@ -131,6 +132,9 @@ $('#addItem').on('pageinit', function(){
 				$("#clearData").style.display = "inline";
 				$("#showData").style.display = "inline";
 				$("#addNew").style.display = "none";
+				$("#showJSON").style.display = "inline";
+				$("#showXML").style.display = "inline";
+				$("#showCSV").style.display = "inline";
 				$("#items").style.display = "none";
 				break;
 			default:
