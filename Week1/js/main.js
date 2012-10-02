@@ -1,8 +1,6 @@
 /*
 Author: Kevin Ward
 Class: ASD1210
-Name: Project 1
-Date: 09-27-2012
 */
 
 $("#home").on("pageinit", function(){
@@ -63,9 +61,9 @@ $('#addItem').on('pageinit', function(){
 			submitHandler: function() {
 				var data = myForm.serializeArray();
 					storeData(key);
-			};
+			},
 			
-			var dateToday = function() {
+			dateToday: function() {
 				var today = new Date();
 				var day = today.getDate();
 				var month = today.getMonth() + 1;
@@ -81,10 +79,10 @@ $('#addItem').on('pageinit', function(){
 				
 				today = month + "-" + day + "-" + year;
 				$('#birthDate').val(today);
-			};
-				dateToday();
+			},
+				//dateToday();
 			
-			$('#reset').on('click', function() {
+			/*$('#reset').on('click', function() {
 				// this is to reset the form
 				resetPF();
 				location.reload('#addItem');
@@ -100,17 +98,17 @@ $('#addItem').on('pageinit', function(){
 				dateToday();
 				$('#koolness').val(25);
 				$('#comments').val("");
-			};
+			};*/
 		});
 
 	//any other code needed for addItem page goes here
 
 
 	// My getElementById or gebi function
-	var gebi = function(x){
-		var theElement = document.getElementById(x);
-		return theElement;
-	};
+//	var gebi = function(x){
+//		var theElement = document.getElementById(x);
+//		return theElement;
+//	};
 
 	// My Variables for the functions
 	var	genderValue;
@@ -124,6 +122,9 @@ $('#addItem').on('pageinit', function(){
 				$("#clearData").style.display = "inline";
 				$("#showData").style.display = "none";
 				$("#addNew").style.display = "inline";
+				$("#showJSON").style.display = "inline";
+				$("#showXML").style.display = "inline";
+				$("#showCSV").style.display = "inline";
 				$("#items").style.display = "inline";
 				break;
 			case "off":
@@ -131,39 +132,15 @@ $('#addItem').on('pageinit', function(){
 				$("#clearData").style.display = "inline";
 				$("#showData").style.display = "inline";
 				$("#addNew").style.display = "none";
+				$("#showJSON").style.display = "inline";
+				$("#showXML").style.display = "inline";
+				$("#showCSV").style.display = "inline";
 				$("#items").style.display = "none";
 				break;
 			default:
 				return false;
 		};
 	};
-
-// Live Search
-	$(document).ready(function(){
-		$("#filter").keyup(function(){
-	 
-			// Retrieve the input field text and reset the count to zero
-			var filter = $(this).val(), count = 0;
-	 
-			// Loop through the KoolPets list
-			$(".itemlist li").each(function(){
-	 
-				// If the list item does not contain the text phrase fade it out
-				if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-					$(this).fadeOut();
-	 
-				// Show the list item if the phrase matches and increase the count by 1
-				} else {
-					$(this).show();
-					count++;
-				}
-			});
-	 
-			// Update the count
-			var numberItems = count;
-			$("#filter-count").text("Number of KoolPets = "+count);
-		});
-	});
 
 //The functions below can go inside or outside the pageinit function for the page in which it is needed.
 
@@ -194,8 +171,8 @@ var storeData = function(key){
 	// Gather round ye olde form field values, and store in ye olde objects.
 	// Object props contain array with the form label and input value.
 	
-	getSelectedRadio();
-	getCheckboxValue();
+	//getSelectedRadio();
+	//getCheckboxValue();
 	
 	var pet					= {};
 		pet.kool1			= ["What is your Pet? ", $('#kool1').val()];
@@ -226,7 +203,7 @@ var getData = function(){
 		var imgLi = document.createElement("div");
 		makeSubList.appendChild(imgLi);
 		var newImg = document.createElement("img");
-		var setSrc = newImg.setAttribute("src", "images/" + catName + ".png");
+		var setSrc = newImg.attr("src", "images/" + catName + ".png");
 		imgLi.appendChild(newImg);
 	};
 
@@ -238,7 +215,7 @@ var getData = function(){
 		editLink.href = "#addItem";
 		editLink.key = key;
 		var editText = "Edit KoolPet";
-		editLink.addEventListener("click", editItem);
+		editLink.on("click", editItem);
 		editLink.innerHTML = editText;
 		linksLi.appendChild(editLink);
 
@@ -252,20 +229,20 @@ var getData = function(){
 		deleteLink.href = "#addItem";
 		deleteLink.key = key;
 		var deleteText = "Release KoolPet";
-		deleteLink.addEventListener("click", deleteItem);
+		deleteLink.on("click", deleteItem);
 		deleteLink.innerHTML = deleteText;
 		linksLi.appendChild(deleteLink);
 	};
 	
 	// This is supposed to write data from Local Storage back to the browser.
 	var makeDiv = document.createElement("div");
-	// makeDiv.setAttribute("id", "items"); // Found out I don't need this line anymore.
+	// makeDiv.attr("id", "items"); // Found out I don't need this line anymore.
 	var makeList = document.createElement("ul");
 	// makeDiv.appendChild(makeList); // Modified this line to work with my current code.
-	gebi("items").appendChild(makeList);
+	$("items").appendChild(makeList);
 	// This code should add the data to my page when I press show data.
 	document.body.appendChild(makeDiv);
-	gebi("items").style.display = "block";
+	$("items").style.display = "block";
 	for (var i=0, len=localStorage.length; i<len; i++) {
 		var makeLi = document.createElement("li");
 		var linksLi = document.createElement("div");
@@ -299,33 +276,33 @@ var getData = function(){
 		toggleControls("off");
 		
 		// Populate the form fields with current localStorage values.
-		gebi("petGroups").value = item.petGroups[1];
-		gebi("petName").value = item.petName[1];
-		gebi("petEmail").value = item.petEmail[1];
+		$("petGroups").value = item.petGroups[1].val();
+		$("petName").value = item.petName[1];
+		$("petEmail").value = item.petEmail[1];
 		var radios = document.forms[0].genderValue;
 		for (var i=0; i<radios.length; i++) {
 			if (radios[i].value == "Male" && item.genderValue[1] == "Male") {
-				radios[i].setAttribute("checked", "checked");
+				radios[i].attr("checked", "checked");
 			} else if (radios[i].value == "Female" && item.genderValue[1] == "Female") {
-				radios[i].setAttribute("checked", "checked");
+				radios[i].attr("checked", "checked");
 			};
 		};
 		if (item.favePet[1] == "Yes") {
-			gebi("favePet").setAttribute("value", "On");
+			$("favePet").attr("value", "On");
 		};
-		gebi("birthDate").value = item.birthDate[1];
-		gebi("koolness").value = item.koolness[1];
-		gebi("comments").value = item.comments[1];
+		$("birthDate").value = item.birthDate[1];
+		$("koolness").value = item.koolness[1];
+		$("comments").value = item.comments[1];
 		
 		// Remove the initial listener from the input "save pet" button.
-		storeData.removeEventListener("click", submit);
+		storeData.off("click", submit);
 		// Change SaveData button Value to Edit Button
-		gebi("submit").value = "Edit KoolPet";
-		var editSubmit = gebi("submit");
+		$("submit").value = "Edit KoolPet";
+		var editSubmit = $("submit");
 		
 		// Save the key value established in this function as a prop of the editSubmit event
 		// so we can use that value when we save the data we edited.
-		editSubmit.addEventListener("click", submit);
+		editSubmit.on("click", submit);
 		editSubmit.key = this.key;
 	};
 
@@ -358,11 +335,11 @@ var clearDataStorage = function(){
 
 // My Variables
 	var showData = $("#showData");
-	showData.addEventListener("click", getData);
+	showData.on("click", getData);
 	var clearLink = $("#clearData");	
-	clearLink.addEventListener("click", clearDataStorage);
+	clearLink.on("click", clearDataStorage);
 	var saveData = $("#submit");
-	saveData.addEventListener("click", storeData);
+	saveData.on("click", storeData);
 
 
 }); // End code for page.
@@ -391,6 +368,32 @@ var search = function() {
 		alert("Please input a search term.");
 		return;
 	}
+
+// Live Search
+$("#filter").keyup(function(){
+
+	// Retrieve the input field text and reset the count to zero
+	var filter = $(this).val(), count = 0;
+
+	// Loop through the KoolPets list
+	$(".itemlist li").each(function(){
+
+		// If the list item does not contain the text phrase fade it out
+		if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+			$(this).fadeOut();
+
+		// Show the list item if the phrase matches and increase the count by 1
+		} else {
+			$(this).show();
+			count++;
+		}
+	});
+
+	// Update the count
+	var numberItems = count;
+	$("#filter-count").text("Number of KoolPets = "+count);
+});
+
 
 };
 	

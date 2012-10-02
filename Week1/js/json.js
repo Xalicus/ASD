@@ -1,8 +1,6 @@
 /*
 Author: Kevin Ward
 Class: ASD1210
-Name: Project 1
-Date: 09-27-2012
 */
 
 var json = {
