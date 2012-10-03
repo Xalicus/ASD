@@ -7,7 +7,6 @@ $("#home").on("pageinit", function(){
 	
 	// Home page code goes here.
 	$("header nav")
-		.slideUp()
 		.slideDown()
 	;
 	
@@ -23,36 +22,10 @@ $("#home").on("pageinit", function(){
 	
 	//mouseenter mouseleave
 	//focusin focusout
-	
-	/*$showJSON.ajax({
-		url			: "../data/data.json",
-		type		: "GET",
-		dataType	: "json",
-		success		: function(data, status) {
-			console.log(status, data);
-		}
-    });
-    $showXML.ajax({
-		url			: "../data/data.xml",
-		type		: "GET",
-		dataType 	: function(data, status) {
-			console.log(status, data);
-		}
-	});
-	$showCSV.ajax({
-		url			: "../data/data.csv",
-		type		: "GET",
-		dataType	: function(data, status) {
-			console.log(status, data);
-		}
-	});
-	*/
-	
-	
+
 }); // End code for home page.
 
 
-		
 $('#addItem').on('pageinit', function(){
 
 	$('#petsForm div').on('click', function(e){
@@ -104,7 +77,7 @@ $('#addItem').on('pageinit', function(){
 				
 				today = month + "-" + day + "-" + year;
 				$('#birthDate').val(today);
-			},
+			}
 				//dateToday();
 			
 			/*$('#reset').on('click', function() {
@@ -200,7 +173,7 @@ var storeData = function(key){
 	//getCheckboxValue();
 	
 	var pet					= {};
-		pet.kool1			= ["What is your Pet? ", $('#kool1').val()];
+		pet.kool1			= ["What is your Pet? ", $('input:slider[name=kool1]:true').val()];
 		pet.petGroups		= ["KoolPet Type: ", $('#petGroups').val()];
 		pet.petName			= ["KoolPet\'s Name: ", $('#petName').val()];
 		pet.petEmail		= ["KoolPet Email: ", $('#petEmail').val()];
@@ -211,7 +184,7 @@ var storeData = function(key){
 		pet.comments		= ["Comments: ", $('#comments').val()];
 	// Save data into Local Storage: Use Stringify to convert the object to a string.
 	localStorage.setItem(id, JSON.stringify(item));
-	console.log(pet.val());
+	console.log(key.val());
 	alert("Pet saved to the KoolPetsDex!");
 }; 
 
@@ -302,6 +275,11 @@ var getData = function(){
 		toggleControls("off");
 		
 		// Populate the form fields with current localStorage values.
+		if (item.kool1[1] == "On") {
+			$("kool1").attr("value", "on");
+		} else {
+			$("kool1").attr("value", "off");
+		};
 		$("petGroups").value = item.petGroups[1].val();
 		$("petName").value = item.petName[1];
 		$("petEmail").value = item.petEmail[1];
@@ -323,7 +301,8 @@ var getData = function(){
 		// Remove the initial listener from the input "save pet" button.
 		storeData.off("click", submit);
 		// Change SaveData button Value to Edit Button
-		$("submit").value = "Edit KoolPet";
+		// $("submit").value = "Edit KoolPet";
+		$("submit").val("Edit KoolPet!");
 		var editSubmit = $("submit");
 		
 		// Save the key value established in this function as a prop of the editSubmit event
@@ -359,27 +338,17 @@ var clearDataStorage = function(){
 	};
 };
 
-// My Variables
-	var showData = $("#showData");
-	showData.on("click", getData);
-	var clearLink = $("#clearData");	
-	clearLink.on("click", clearDataStorage);
-	var saveData = $("#submit");
-	saveData.on("click", storeData);
-
-
 }); // End code for page.
 
 
 $("#showItem").on("pageinit", function(){
 	// Page code goes here.
 	$("header nav")
-		.slideUp()
 		.slideDown()
 	;
 	
 	function searchInput() {
-		if ($('#searchField').val() == "") {
+		if ($('#searchField').val() === "") {
 			$('#searchResults').html("");
 		}
 	}
@@ -390,7 +359,7 @@ var search = function() {
 	var error = true;
 	var match;
 	
-	if (getInput == "") {
+	if (getInput === "") {
 		alert("Please input a search term.");
 		return;
 	}
@@ -418,10 +387,41 @@ $("#filter").keyup(function(){
 	// Update the count
 	var numberItems = count;
 	$("#filter-count").text("Number of KoolPets = "+count);
-});
+}); // end live search
 
 
-};
+}; // end search function
+
+// Function to call the JSON data.
+var showJSON = $.ajax({
+		url			: 'data/data.json',
+		type		: 'GET',
+		dataType	: 'json',
+		success		: function(data, status) {
+			console.log(status, data);
+		}
+    });
+
+// Function to call the XML data.
+var showXML = $.ajax({
+		url			: 'data/data.xml',
+		type		: 'GET',
+		dataType 	: 'xml',
+		success		: function(data, status) {
+			console.log(status, data);
+		}
+	});
+
+// Function to call the CSV data.
+var showCSV = $.ajax({
+		url			: 'data/data.csv',
+		type		: 'GET',
+		dataType	: 'csv',
+		success		: function(data, status) {
+			console.log(status, data);
+		}
+	});
+	
 	
 }); // End code for page.
 
@@ -429,7 +429,6 @@ $("#filter").keyup(function(){
 $("#info").on("pageinit", function(){
 	// Page code goes here.
 	$("header nav")
-		.slideUp()
 		.slideDown()
 	;	
 }); // End code for page.
@@ -438,7 +437,6 @@ $("#info").on("pageinit", function(){
 $("#news").on("pageinit", function(){
 	// Page code goes here.
 	$("header nav")
-		.slideUp()
 		.slideDown()
 	;	
 }); // End code for page.
@@ -447,7 +445,6 @@ $("#news").on("pageinit", function(){
 $("#cs").on("pageinit", function(){
 	// Page code goes here.
 	$("header nav")
-		.slideUp()
 		.slideDown()
 	;	
 }); // End code for page.
@@ -456,7 +453,14 @@ $("#cs").on("pageinit", function(){
 $("#addItemErrors").on("pageinit", function(){
 	// Page code goes here.
 	$("header nav")
-		.slideUp()
 		.slideDown()
 	;	
 }); // End code for page.
+
+// My Variables
+	var showData = $("#showData");
+	showData.on("click", getData);
+	var clearLink = $("#clearData");	
+	clearLink.on("click", clearDataStorage);
+	var saveData = $("#submit");
+	saveData.on("click", storeData);
