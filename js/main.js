@@ -8,6 +8,7 @@ $("#home").on("pageinit", function(){
 	// Home page code goes here.
 	$("header nav")
 		.slideDown()
+		.fadeIn()
 	;
 	
 	/*$('<a href="#">Link</a>')
@@ -101,13 +102,6 @@ $('#addItem').on('pageinit', function(){
 
 	//any other code needed for addItem page goes here
 
-
-	// My getElementById or gebi function
-//	var gebi = function(x){
-//		var theElement = document.getElementById(x);
-//		return theElement;
-//	};
-
 	// My Variables for the functions
 	var	genderValue;
 	var	faveValue = "No";
@@ -189,13 +183,13 @@ var storeData = function(key){
 }; 
 
 // My getData function
-var getData = function(){
+/*var getData = function(){
 
 	toggleControls("on");
 	if(localStorage.length === 0) {
 		alert("There were no Pets, so KoolPets were added!");
 		autoFillData();
-	};
+	};*/
 	
 // This is to get images for the correct category.
 	var getImg = function(catName, makeSubList) {
@@ -393,35 +387,91 @@ $("#filter").keyup(function(){
 }; // end search function
 
 // Function to call the JSON data.
-var showJSON = $.ajax({
+$('#showJSON').on('click', function() {
+$('#items').empty();
+	$.ajax({
 		url			: 'data/data.json',
 		type		: 'GET',
 		dataType	: 'json',
-		success		: function(data, status) {
-			console.log(status, data);
+		success		: function(data) {
+			for(var i=0, j=data.pets.length; i<j; i++){
+				var pet = data.pets[i];
+				$(''+
+					'<div class="pets">'+
+						'<h2>'+ pet.petName +'</h2>'+
+						'<p>'+ pet.petGroups +'</p>'+
+						'<p>'+ pet.petEmail +'</p>'+
+						'<p>'+ pet.genderValue +'</p>'+
+						'<p>'+ pet.favePet +'</p>'+
+						'<p>'+ pet.birthdate +'</p>'+
+						'<p>'+ pet.kool1 +'</p>'+
+						'<p>'+ pet.koolness +'</p>'+
+						'<p>'+ pet.comments +'</p>'+
+					'</div>'
+				).appendTo('#items');
+			};
+			console.log(data);
 		}
     });
+}); // end showjson function
 
 // Function to call the XML data.
-var showXML = $.ajax({
+$('#showXML').on('click', function() {
+$('#items').empty();
+	$.ajax({
 		url			: 'data/data.xml',
 		type		: 'GET',
 		dataType 	: 'xml',
-		success		: function(data, status) {
-			console.log(status, data);
+		success		: function(data) {
+			for(var i=0, j=data.pets.length; i<j; i++){
+				var pet = data.pets[i];
+				$(''+
+					'<div class="pets">'+
+						'<h2>'+ pet.petName +'</h2>'+
+						'<p>'+ pet.petGroups +'</p>'+
+						'<p>'+ pet.petEmail +'</p>'+
+						'<p>'+ pet.genderValue +'</p>'+
+						'<p>'+ pet.favePet +'</p>'+
+						'<p>'+ pet.birthdate +'</p>'+
+						'<p>'+ pet.kool1 +'</p>'+
+						'<p>'+ pet.koolness +'</p>'+
+						'<p>'+ pet.comments +'</p>'+
+					'</div>'
+				).appendTo('#items');
+			};
+			console.log(data);
 		}
 	});
+}); // end showxml function
 
 // Function to call the CSV data.
-var showCSV = $.ajax({
+$('#showCSV').on('click', function() {
+$('#items').empty();
+	$.ajax({
 		url			: 'data/data.csv',
 		type		: 'GET',
 		dataType	: 'csv',
-		success		: function(data, status) {
-			console.log(status, data);
+		success		: function(data) {
+			for(var i=0, j=data.pets.length; i<j; i++){
+				var pet = data.pets[i];
+				$(''+
+					'<div class="pets">'+
+						'<h2>'+ pet.petName +'</h2>'+
+						'<p>'+ pet.petGroups +'</p>'+
+						'<p>'+ pet.petEmail +'</p>'+
+						'<p>'+ pet.genderValue +'</p>'+
+						'<p>'+ pet.favePet +'</p>'+
+						'<p>'+ pet.birthdate +'</p>'+
+						'<p>'+ pet.kool1 +'</p>'+
+						'<p>'+ pet.koolness +'</p>'+
+						'<p>'+ pet.comments +'</p>'+
+					'</div>'
+				).appendTo('#items');
+			};
+			console.log(data);
 		}
 	});
-	
+}); // end showcsv function
 	
 }); // End code for page.
 
