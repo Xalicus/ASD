@@ -138,7 +138,7 @@ $('#addItem').on('pageinit', function(){
 
 
 // My autoFillData function
-var autoFillData = function (){
+/*var autoFillData = function (){
 	// The actual JSON OBJECT data required for this to work is coming from the 
 	// json.js file, which is loaded from the html page.
 	// Store the JSON OBJECT into local storage.
@@ -146,7 +146,7 @@ var autoFillData = function (){
 		var id = Math.floor(Math.random()*1000001);
 		localStorage.setItem(id, JSON.stringify(json[n]));
 	};
-};
+};*/
 
 // My storeData function
 var storeData = function(key){
@@ -232,28 +232,28 @@ var storeData = function(key){
 	// makeDiv.attr("id", "items"); // Found out I don't need this line anymore.
 	var makeList = document.createElement("ul");
 	// makeDiv.appendChild(makeList); // Modified this line to work with my current code.
-	$("items").appendChild(makeList);
+	$('#items').appendTo(makeList);
 	// This code should add the data to my page when I press show data.
-	document.body.appendChild(makeDiv);
-	$("items").style.display = "block";
+	document.body.appendTo(makeDiv);
+	$('#items').style.display = "block";
 	for (var i=0, len=localStorage.length; i<len; i++) {
 		var makeLi = document.createElement("li");
 		var linksLi = document.createElement("div");
-		makeList.appendChild(makeLi);
+		makeList.appendTo(makeLi);
 		var key = localStorage.key(i);
 		var value = localStorage.getItem(key);
 		// Convert strings back to being an object from localStorage value.
 		var object = JSON.parse(value);
 		var makeSubList = document.createElement("div");
-		makeLi.appendChild(makeSubList);
+		makeLi.appendTo(makeSubList);
 		// This next line is to grab the Img that fits the category it's in.
 		getImg(object.petGroups[1], makeSubList);
 		for (var n in object) {
 			var makeSubLi = document.createElement("div");
-			makeSubList.appendChild(makeSubLi);
+			makeSubList.appendTo(makeSubLi);
 			var optSubText = object[n][0] + " " + object[n][1];
 			makeSubLi.innerHTML = optSubText;
-			makeSubList.appendChild(linksLi);
+			makeSubList.appendTo(linksLi);
 		};
 		// Create the edit and delete buttons/link for each item in local storage.
 		makeItemLinks(localStorage.key(i), linksLi);
@@ -275,8 +275,8 @@ var storeData = function(key){
 			$("kool1").attr("value", "off");
 		};
 		$("petGroups").value = item.petGroups[1].val();
-		$("petName").value = item.petName[1];
-		$("petEmail").value = item.petEmail[1];
+		$("petName").value = item.petName[1].val();
+		$("petEmail").value = item.petEmail[1].val();
 		var radios = document.forms[0].genderValue;
 		for (var i=0; i<radios.length; i++) {
 			if (radios[i].value == "Male" && item.genderValue[1] == "Male") {
@@ -288,9 +288,9 @@ var storeData = function(key){
 		if (item.favePet[1] == "Yes") {
 			$("favePet").attr("value", "On");
 		};
-		$("birthDate").value = item.birthDate[1];
-		$("koolness").value = item.koolness[1];
-		$("comments").value = item.comments[1];
+		$("birthDate").value = item.birthDate[1].val();
+		$("koolness").value = item.koolness[1].val();
+		$("comments").value = item.comments[1].val();
 		
 		// Remove the initial listener from the input "save pet" button.
 		storeData.off("click", submit);
