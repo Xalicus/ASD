@@ -163,9 +163,6 @@ var storeData = function(key){
 	// Gather round ye olde form field values, and store in ye olde objects.
 	// Object props contain array with the form label and input value.
 	
-	//getSelectedRadio();
-	//getCheckboxValue();
-	
 	var pet					= {};
 		pet.kool1			= ["What is your Pet? ", $('input:slider[name=kool1]:true').val()];
 		pet.petGroups		= ["KoolPet Type: ", $('#petGroups').val()];
@@ -181,75 +178,68 @@ var storeData = function(key){
 	console.log(key.val());
 	alert("Pet saved to the KoolPetsDex!");
 }; 
-
-// My getData function
-/*var getData = function(){
-
-	toggleControls("on");
-	if(localStorage.length === 0) {
-		alert("There were no Pets, so KoolPets were added!");
-		autoFillData();
-	};*/
 	
 // This is to get images for the correct category.
 	var getImg = function(catName, makeSubList) {
-		var imgLi = document.createElement("div");
-		makeSubList.appendChild(imgLi);
-		var newImg = document.createElement("img");
+		var imgLi = $('div');
+		makeSubList.append(imgLi);
+		var newImg = $('img');
 		var setSrc = newImg.attr("src", "images/" + catName + ".png");
-		imgLi.appendChild(newImg);
+		imgLi.append(newImg);
 	};
 
 // My Make Item Links Function
 	// Create the edit and delete links for each stored item when displayed.
 	var makeItemLinks = function(key, linksLi) {
 		// Add edit single item link
-		var editLink = document.createElement("a");
-		editLink.href = "#addItem";
+		var editLink = $('a');
+		editLink.attr("href", "#addItem");
 		editLink.key = key;
 		var editText = "Edit KoolPet";
-		editLink.on("click", editItem);
-		editLink.innerHTML = editText;
-		linksLi.appendChild(editLink);
+		editLink.addClass("editLink")
+			.on('click', editItem)
+			.html(editText);
+		linksLi.append(editLink);
 
 		// Add my line break
-		var breakTag = document.createElement("br");
-		linksLi.appendChild(breakTag);
+		var breakTag = $('br');
+		linksLi.append(breakTag);
 
 
 		// Add delete single item link
-		var deleteLink = document.createElement("a");
-		deleteLink.href = "#addItem";
+		var deleteLink = $('a');
+		deleteLink.attr("href", "#addItem");
 		deleteLink.key = key;
 		var deleteText = "Release KoolPet";
-		deleteLink.on("click", deleteItem);
-		deleteLink.innerHTML = deleteText;
-		linksLi.appendChild(deleteLink);
+		deleteLink.addClass("deleteLink")
+			.on('click', deleteItem)
+			.html(deleteText);
+		linksLi.append(deleteLink);
 	};
 	
 	// This is supposed to write data from Local Storage back to the browser.
-	var makeDiv = document.createElement("div");
+	var makeDiv = $("div");
 	// makeDiv.attr("id", "items"); // Found out I don't need this line anymore.
-	var makeList = document.createElement("ul");
+	var makeList = $("ul");
 	// makeDiv.appendChild(makeList); // Modified this line to work with my current code.
 	$('#items').appendTo(makeList);
 	// This code should add the data to my page when I press show data.
 	document.body.appendTo(makeDiv);
 	$('#items').style.display = "block";
 	for (var i=0, len=localStorage.length; i<len; i++) {
-		var makeLi = document.createElement("li");
-		var linksLi = document.createElement("div");
+		var makeLi = $('li');
+		var linksLi = $('div');
 		makeList.appendTo(makeLi);
 		var key = localStorage.key(i);
 		var value = localStorage.getItem(key);
 		// Convert strings back to being an object from localStorage value.
 		var object = JSON.parse(value);
-		var makeSubList = document.createElement("div");
+		var makeSubList = $('div');
 		makeLi.appendTo(makeSubList);
 		// This next line is to grab the Img that fits the category it's in.
 		getImg(object.petGroups[1], makeSubList);
 		for (var n in object) {
-			var makeSubLi = document.createElement("div");
+			var makeSubLi = $('div');
 			makeSubList.appendTo(makeSubLi);
 			var optSubText = object[n][0] + " " + object[n][1];
 			makeSubLi.innerHTML = optSubText;
@@ -305,7 +295,6 @@ var storeData = function(key){
 		editSubmit.key = this.key;
 	};
 
-};
 
 // My Delete Item Function
 var	deleteItem = function (){
@@ -321,7 +310,7 @@ var	deleteItem = function (){
 
 
 // My Clear Data Function
-var clearDataStorage = function(){
+var clearDataStorage = function() {
 	if(localStorage.length === 0) {
 		alert("No KoolPets in the KoolPetsDex.");
 	} else {
@@ -508,8 +497,8 @@ $("#addItemErrors").on("pageinit", function(){
 }); // End code for page.
 
 // My Variables
-	var showData = $("#showData");
-	showData.on("click", getData);
+//	var showData = $("#showData");
+//	showData.on("click", getData);
 	var clearLink = $("#clearData");	
 	clearLink.on("click", clearDataStorage);
 	var saveData = $("#submit");
