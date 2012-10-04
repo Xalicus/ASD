@@ -8,7 +8,6 @@ $("#home").on("pageinit", function(){
 	// Home page code goes here.
 	$("header nav")
 		.slideDown()
-		.fadeIn()
 	;
 	
 	/*$('<a href="#">Link</a>')
@@ -76,10 +75,10 @@ $('#addItem').on('pageinit', function(){
 					month = "0" + month;
 				}
 				
-				today = month + "-" + day + "-" + year;
+				today = year + "-" + month + "-" + day;
 				$('#birthDate').val(today);
 			}
-				//dateToday();
+				//console.log(dateToday());
 			
 			/*$('#reset').on('click', function() {
 				// this is to reset the form
@@ -106,6 +105,15 @@ $('#addItem').on('pageinit', function(){
 	var	genderValue;
 	var	faveValue = "No";
 	var	errMsg = $("#errors");
+	
+	// My Variables
+//	var showData = $("#showData");
+//	showData.on("click", getData);
+	var clearLink = $("#clearData");	
+	clearLink.on("click", clearDataStorage);
+	var saveData = $("#submit");
+	saveData.on("click", storeData);
+	
 	
 	var toggleControls = function(n) {
 		switch(n) {
@@ -222,28 +230,28 @@ var storeData = function(key){
 	// makeDiv.attr("id", "items"); // Found out I don't need this line anymore.
 	var makeList = $("ul");
 	// makeDiv.appendChild(makeList); // Modified this line to work with my current code.
-	$('#items').appendTo(makeList);
+	$('#items').append(makeList);
 	// This code should add the data to my page when I press show data.
-	document.body.appendTo(makeDiv);
+	$('#items').append(makeDiv);
 	$('#items').style.display = "block";
 	for (var i=0, len=localStorage.length; i<len; i++) {
 		var makeLi = $('li');
 		var linksLi = $('div');
-		makeList.appendTo(makeLi);
+		makeList.append(makeLi);
 		var key = localStorage.key(i);
 		var value = localStorage.getItem(key);
 		// Convert strings back to being an object from localStorage value.
 		var object = JSON.parse(value);
 		var makeSubList = $('div');
-		makeLi.appendTo(makeSubList);
+		makeLi.append(makeSubList);
 		// This next line is to grab the Img that fits the category it's in.
 		getImg(object.petGroups[1], makeSubList);
 		for (var n in object) {
 			var makeSubLi = $('div');
-			makeSubList.appendTo(makeSubLi);
+			makeSubList.append(makeSubLi);
 			var optSubText = object[n][0] + " " + object[n][1];
 			makeSubLi.innerHTML = optSubText;
-			makeSubList.appendTo(linksLi);
+			makeSubList.append(linksLi);
 		};
 		// Create the edit and delete buttons/link for each item in local storage.
 		makeItemLinks(localStorage.key(i), linksLi);
@@ -314,7 +322,7 @@ var clearDataStorage = function() {
 	if(localStorage.length === 0) {
 		alert("No KoolPets in the KoolPetsDex.");
 	} else {
-		localStorage.clear();
+		localStorage.empty();
 		alert("All KoolPets have been Released!");
 		window.location.reload();
 		return false;
@@ -495,11 +503,3 @@ $("#addItemErrors").on("pageinit", function(){
 		.slideDown()
 	;	
 }); // End code for page.
-
-// My Variables
-//	var showData = $("#showData");
-//	showData.on("click", getData);
-	var clearLink = $("#clearData");	
-	clearLink.on("click", clearDataStorage);
-	var saveData = $("#submit");
-	saveData.on("click", storeData);
