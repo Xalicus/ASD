@@ -23,6 +23,11 @@ $("#home").on("pageinit", function(){
 	//mouseenter mouseleave
 	//focusin focusout
 
+var changePage = function(pageId) {
+	$('#' + pageId).trigger('pageinit');
+	$.mobile.changePage($('#' + pageId), {transition:"slide"});
+};
+
 }); // End code for home page.
 
 
@@ -37,6 +42,13 @@ $('#addItem').on('pageinit', function(){
 	$('#petName').on('click', function() {
 		$('#petName').val("");
 	});
+	$('#comments').val("Place comments like birthday and others here.");
+	$('#comments').on('click', function() {
+		$('#comments').val("");
+	});
+	/*$('#comments').focusout('click', function() {
+		$('#comments').val("You no enter comment! You die now! KAMEHAMEHA!!!");
+	});*/
 
 	var myForm = $('#petForm'),
 		aierrorsLink = $('#aierrorsLink')
@@ -86,14 +98,11 @@ $('#addItem').on('pageinit', function(){
 				location.reload('#addItem');
 			});
 			var resetPF = function() {
-				$('#kool1').attr('checked', false);
 				$('#petName').val("");
 				$('#petGroups').val("");
-				$('#petEmail').val("");
 				$('#male').attr('checked', true);
 				$('#female').attr('checked', false);
 				$('#favePet').attr('checked', false);
-				dateToday();
 				$('#koolness').val(25);
 				$('#comments').val("");
 			};*/
@@ -104,15 +113,15 @@ $('#addItem').on('pageinit', function(){
 	// My Variables for the functions
 	var	genderValue;
 	var	faveValue = "No";
-	var	errMsg = $("#errors");
+	var	errMsg = $("#aierrorsLink");
 	
 	// My Variables
 //	var showData = $("#showData");
 //	showData.on("click", getData);
-	var clearLink = $("#clearData");	
-	clearLink.on("click", clearDataStorage);
-	var saveData = $("#submit");
-	saveData.on("click", storeData);
+//	var clearLink = $("#clearData");	
+//	clearLink.on("click", clearDataStorage);
+//	var saveData = $("#submit");
+//	saveData.on("click", storeData);
 	
 	
 	var toggleControls = function(n) {
@@ -172,118 +181,122 @@ var storeData = function(key){
 	// Object props contain array with the form label and input value.
 	
 	var pet					= {};
-		pet.kool1			= ["What is your Pet? ", $('input:slider[name=kool1]:true').val()];
 		pet.petGroups		= ["KoolPet Type: ", $('#petGroups').val()];
 		pet.petName			= ["KoolPet\'s Name: ", $('#petName').val()];
-		pet.petEmail		= ["KoolPet Email: ", $('#petEmail').val()];
 		pet.genderValue		= ["Gender: ", $('input:radio[name=genderValue]:checked').val()];
 		pet.favePet			= ["Favorite KoolPet: ", $('input:slider[name=favePet]:true').val()];
-		pet.birthDate		= ["Date of Birth: ", $('#birthDate').val()];
 		pet.koolness		= ["Koolness Factor: ", $('#koolness').val()];
 		pet.comments		= ["Comments: ", $('#comments').val()];
 	// Save data into Local Storage: Use Stringify to convert the object to a string.
 	localStorage.setItem(id, JSON.stringify(item));
 	console.log(key.val());
+	changePage();
 	alert("Pet saved to the KoolPetsDex!");
 }; 
 
-
+/*
 // Function to call the JSON data.
 $('#showJSON').on('click', function() {
-$('#items').empty();
 	$.ajax({
 		url			: 'data/data.json',
 		type		: 'GET',
 		dataType	: 'json',
 		success		: function(data) {
-			for(var i=0, j=data.pets.length; i<j; i++){
+			$('#items').empty();
+			for(var i=0, i=data.pets.length; i++){
 				var pet = data.pets[i];
-				$(''+
-					'<div class="pets">'+
-						'<h2>'+ pet.petName +'</h2>'+
-						'<p>'+ pet.petGroups +'</p>'+
-						'<p>'+ pet.petEmail +'</p>'+
-						'<p>'+ pet.genderValue +'</p>'+
-						'<p>'+ pet.favePet +'</p>'+
-						'<p>'+ pet.birthdate +'</p>'+
-						'<p>'+ pet.kool1 +'</p>'+
-						'<p>'+ pet.koolness +'</p>'+
-						'<p>'+ pet.comments +'</p>'+
+				$('' +
+					'<div class="jpets">' +
+						getImg(object.petGroups[1], makeSubList) +
+						'<h2>'+ pet.petName +'</h2>' +
+						'<p>'+ pet.petGroups +'</p>' +
+						'<p>'+ pet.genderValue +'</p>' +
+						'<p>'+ pet.favePet +'</p>' +
+						'<p>'+ pet.koolness +'</p>' +
+						'<p>'+ pet.comments +'</p>' +
 					'</div>'
 				).appendTo('#items');
 			};
 			console.log(data);
+		},
+		error: function(data) {
+			console.log(showJSON);
 		}
+		$('#items').listview('refresh');
     });
 }); // end showjson function
 
 // Function to call the XML data.
 $('#showXML').on('click', function() {
-$('#items').empty();
 	$.ajax({
 		url			: 'data/data.xml',
 		type		: 'GET',
 		dataType 	: 'xml',
 		success		: function(data) {
+			$('#items').empty();
 			for(var i=0, j=data.pets.length; i<j; i++){
 				var pet = data.pets[i];
 				$(''+
-					'<div class="pets">'+
+					'<div class="xpets">'+
+						getImg(object.petGroups[1], makeSubList) +
 						'<h2>'+ pet.petName +'</h2>'+
 						'<p>'+ pet.petGroups +'</p>'+
-						'<p>'+ pet.petEmail +'</p>'+
 						'<p>'+ pet.genderValue +'</p>'+
 						'<p>'+ pet.favePet +'</p>'+
-						'<p>'+ pet.birthdate +'</p>'+
-						'<p>'+ pet.kool1 +'</p>'+
 						'<p>'+ pet.koolness +'</p>'+
 						'<p>'+ pet.comments +'</p>'+
 					'</div>'
 				).appendTo('#items');
 			};
 			console.log(data.pets);
+		},
+		error: function(data) {
+			console.log(showXML);
 		}
+		$('#items').listview('refresh');
 	});
 }); // end showxml function
 
 // Function to call the CSV data.
 $('#showCSV').on('click', function() {
-$('#items').empty();
 	$.ajax({
 		url			: 'data/data.csv',
 		type		: 'GET',
 		dataType	: 'csv',
 		success		: function(data) {
+			$('#items').empty();
 			for(var i=0, j=data.pets.length; i<j; i++){
 				var pet = data.pets[i];
 				$(''+
-					'<div class="pets">'+
+					'<div class="cpets">'+
+						getImg(object.petGroups[1], makeSubList) +
 						'<h2>'+ pet.petName +'</h2>'+
 						'<p>'+ pet.petGroups +'</p>'+
-						'<p>'+ pet.petEmail +'</p>'+
 						'<p>'+ pet.genderValue +'</p>'+
 						'<p>'+ pet.favePet +'</p>'+
-						'<p>'+ pet.birthdate +'</p>'+
-						'<p>'+ pet.kool1 +'</p>'+
 						'<p>'+ pet.koolness +'</p>'+
 						'<p>'+ pet.comments +'</p>'+
 					'</div>'
 				).appendTo('#items');
 			};
 			console.log(data);
+		},
+		error: function(data) {
+			console.log(showCSV);
 		}
+		$('#items').listview('refresh');
 	});
 }); // end showcsv function
-
+*/
 
 
 // This is to get images for the correct category.
 	var getImg = function(catName, makeSubList) {
 		var imgLi = $('div');
-		makeSubList.append(imgLi);
+		makeSubList.appendTo(imgLi);
 		var newImg = $('img');
 		var setSrc = newImg.attr("src", "images/" + catName + ".png");
-		imgLi.append(newImg);
+		imgLi.appendTo(newImg);
 	};
 
 // My Make Item Links Function
@@ -297,7 +310,7 @@ $('#items').empty();
 		editLink.addClass("editLink")
 			.on('click', editItem)
 			.html(editText);
-		linksLi.append(editLink);
+		linksLi.appendTo(editLink);
 
 		// Add my line break
 		var breakTag = $('br');
@@ -312,7 +325,7 @@ $('#items').empty();
 		deleteLink.addClass("deleteLink")
 			.on('click', deleteItem)
 			.html(deleteText);
-		linksLi.append(deleteLink);
+		linksLi.appendTo(deleteLink);
 	};
 	
 	// This is supposed to write data from Local Storage back to the browser.
@@ -320,7 +333,7 @@ $('#items').empty();
 	// makeDiv.attr("id", "items"); // Found out I don't need this line anymore.
 	var makeList = $("ul");
 	// makeDiv.appendChild(makeList); // Modified this line to work with my current code.
-	$('#items').append(makeList);
+	$('#items').appendTo(makeList);
 	// This code should add the data to my page when I press show data.
 	$('#items').append(makeDiv);
 	$('#items').style.display = "block";
@@ -419,6 +432,11 @@ var clearDataStorage = function() {
 	};
 };
 
+var changePage = function(pageId) {
+	$('#' + pageId).trigger('pageinit');
+	$.mobile.changePage($('#' + pageId), {transition:"slide"});
+};
+
 }); // End code for page.
 
 
@@ -433,6 +451,11 @@ $("#showItem").on("pageinit", function(){
 			$('#searchResults').html("");
 		}
 	}
+
+var changePage = function(pageId) {
+	$('#' + pageId).trigger('pageinit');
+	$.mobile.changePage($('#' + pageId), {transition:"slide"});
+};
 
 var search = function() {
 	var getInput = $('#searchField').val();
@@ -472,7 +495,112 @@ $("#filter").keyup(function(){
 
 
 }; // end search function
-	
+
+// Function to call the JSON data.
+$('#showJSON').on('click', function() {
+	$.ajax({
+		url			: 'data/data.json',
+		type		: 'GET',
+		dataType	: 'json',
+		success		: function(data) {
+			$('#items').empty();
+			for(var i=0, i=data.pets.length; i++){
+				var pet = data.pets[i];
+				$('' +
+					'<div class="jpets">' +
+						getImg(object.petGroups[1], makeSubList) +
+						'<h2>'+ pet.petName +'</h2>' +
+						'<p>'+ pet.petGroups +'</p>' +
+						'<p>'+ pet.genderValue +'</p>' +
+						'<p>'+ pet.favePet +'</p>' +
+						'<p>'+ pet.koolness +'</p>' +
+						'<p>'+ pet.comments +'</p>' +
+					'</div>'
+				).appendTo('#items');
+			};
+			console.log(data);
+			changePage();
+		},
+		error: function(data) {
+			console.log(showJSON);
+		}
+		$('#items').listview('refresh');
+    });
+}); // end showjson function
+
+// Function to call the XML data.
+$('#showXML').on('click', function() {
+	$.ajax({
+		url			: 'data/data.xml',
+		type		: 'GET',
+		dataType 	: 'xml',
+		success		: function(data) {
+			$('#items').empty();
+			for(var i=0, j=data.pets.length; i<j; i++){
+				var pet = data.pets[i];
+				$(''+
+					'<div class="xpets">'+
+						getImg(object.petGroups[1], makeSubList) +
+						'<h2>'+ pet.petName +'</h2>'+
+						'<p>'+ pet.petGroups +'</p>'+
+						'<p>'+ pet.genderValue +'</p>'+
+						'<p>'+ pet.favePet +'</p>'+
+						'<p>'+ pet.koolness +'</p>'+
+						'<p>'+ pet.comments +'</p>'+
+					'</div>'
+				).appendTo('#items');
+			};
+			console.log(data.pets);
+			changePage();
+		},
+		error: function(data) {
+			console.log(showXML);
+		}
+		$('#items').listview('refresh');
+	});
+}); // end showxml function
+
+// Function to call the CSV data.
+$('#showCSV').on('click', function() {
+	$.ajax({
+		url			: 'data/data.csv',
+		type		: 'GET',
+		dataType	: 'csv',
+		success		: function(data) {
+			$('#items').empty();
+			for(var i=0, j=data.pets.length; i<j; i++){
+				var pet = data.pets[i];
+				$(''+
+					'<div class="cpets">'+
+						getImg(object.petGroups[1], makeSubList) +
+						'<h2>'+ pet.petName +'</h2>'+
+						'<p>'+ pet.petGroups +'</p>'+
+						'<p>'+ pet.genderValue +'</p>'+
+						'<p>'+ pet.favePet +'</p>'+
+						'<p>'+ pet.koolness +'</p>'+
+						'<p>'+ pet.comments +'</p>'+
+					'</div>'
+				).appendTo('#items');
+			};
+			console.log(data);
+			changePage();
+		},
+		error: function(data) {
+			console.log(showCSV);
+		}
+		$('#items').listview('refresh');
+	});
+}); // end showcsv function
+
+// This is to get images for the correct category.
+	var getImg = function(catName, makeSubList) {
+		var imgLi = $('div');
+		makeSubList.appendTo(imgLi);
+		var newImg = $('img');
+		var setSrc = newImg.attr("src", "images/" + catName + ".png");
+		imgLi.appendTo(newImg);
+	};
+
 }); // End code for page.
 
 
@@ -480,7 +608,13 @@ $("#info").on("pageinit", function(){
 	// Page code goes here.
 	$("header nav")
 		.slideDown()
-	;	
+	;
+	
+var changePage = function(pageId) {
+	$('#' + pageId).trigger('pageinit');
+	$.mobile.changePage($('#' + pageId), {transition:"slide"});
+};
+
 }); // End code for page.
 
 
@@ -488,7 +622,13 @@ $("#news").on("pageinit", function(){
 	// Page code goes here.
 	$("header nav")
 		.slideDown()
-	;	
+	;
+	
+var changePage = function(pageId) {
+	$('#' + pageId).trigger('pageinit');
+	$.mobile.changePage($('#' + pageId), {transition:"slide"});
+};
+
 }); // End code for page.
 
 
@@ -496,7 +636,13 @@ $("#cs").on("pageinit", function(){
 	// Page code goes here.
 	$("header nav")
 		.slideDown()
-	;	
+	;
+
+var changePage = function(pageId) {
+	$('#' + pageId).trigger('pageinit');
+	$.mobile.changePage($('#' + pageId), {transition:"slide"});
+};
+
 }); // End code for page.
 
 
@@ -504,5 +650,11 @@ $("#addItemErrors").on("pageinit", function(){
 	// Page code goes here.
 	$("header nav")
 		.slideDown()
-	;	
+	;
+
+var changePage = function(pageId) {
+	$('#' + pageId).trigger('pageinit');
+	$.mobile.changePage($('#' + pageId), {transition:"slide"});
+};
+
 }); // End code for page.

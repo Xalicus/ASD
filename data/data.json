@@ -1,8 +1,3 @@
-/*
-Author: Kevin Ward
-Class: ASD1210
-*/
-
 var pets = {
 	"pet1": {
 		"kool1": "Kool",
