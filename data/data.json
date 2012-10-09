@@ -1,9 +1,4 @@
-/*
-Author: Kevin Ward
-Class: ASD1210
-*/
-
-var pets = {
+var pets = [{
 	"pet1": {
 		"kool1": "Kool",
 		"petGroups": "Dogs",
@@ -81,4 +76,4 @@ var pets = {
 		"koolness": "100",
 		"comments": "My first cat, growing up."
 	}
-};
+}];

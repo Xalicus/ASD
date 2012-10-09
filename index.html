@@ -45,6 +45,10 @@ Class: ASD1210
 		<div data-role="content" id="petsearchbrowse" data-theme="b">
 			
 			<div id="browsePets">
+				<a href="#showItem" id="showPet" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true">Show KoolPets</a>
+			</div>
+			
+			<div id="browsePets">
 				<h3>Browse Kev's KoolPetsDex</h3>
 				<div data-role="collapsible-set">
 					<div data-role="collapsible" data-collapsed="true">
@@ -138,13 +142,13 @@ Class: ASD1210
 		<div id="KoolPetForm">
 			<h3>Choose the type of KoolPet you want!.</h3>
 				<nav id="showLoseAdd">
-				<a href="#showItem" id="showData" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Show KoolPets</a> 
-				<a href="#addItem" id="clearData" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Release all KoolPets</a> 
-				<a href="#addItem" id="addNew" style="display:none; "data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Add New KoolPet</a>
-				<br />
-				<a href="#showItem" id="showJSON" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Show JSON Data</a>
+				<!--<a href="#showItem" id="showJSON" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Show JSON Data</a>
 				<a href="#showItem" id="showXML" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Show XML Data</a>
 				<a href="#showItem" id="showCSV" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Show CSV Data</a>
+				<br />-->
+				<a href="#showItem" id="showData" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Show KoolPets</a>
+				<a href="#addItem" id="clearData" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Release all KoolPets</a> 
+				<a href="#addItem" id="addNew" style="display:none; "data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Add New KoolPet</a>
 				</nav>
 			<br />
 			<form action="#" id="petForm" data-role="none">
@@ -154,14 +158,6 @@ Class: ASD1210
 					<ul id="errors"></ul>
 					
 					<ul id="questions">
-						<div data-role="fieldcontain">
-							<label for="kool1">What is your pet?:</label>
-							<select data-role="slider">
-								<option value="off">Lame</option>
-								<option value="on">Kool</option>
-							</select>
-						</div>
-						
 						<div data-role="fieldcontain" name="petsType" id="petsType">
 							<label for="petsType">KoolPet Type: *</label>
 							<br />
@@ -185,13 +181,6 @@ Class: ASD1210
 						</div>
 						
 						<div data-role="fieldcontain">
-							<label for="petEmail">KoolPet Email: *</label>
-							<br />
-								<input type="email" name="petEmail" id="petEmail" value="" class="required" email />
-								<p id="greyText">Example: example@petmail.com</p>
-						</div>
-						
-						<div data-role="fieldcontain">
 							<fieldset data-role="controlgroup" data-type="horizontal">
 								<legend for="genderValue">Gender: *</legend>
 								<br />
@@ -205,17 +194,17 @@ Class: ASD1210
 						<div data-role="fieldcontain">
 							<label for="favePet">Favorite KoolPet:</label>
 							<br />
-								<select name="favePet" id="favePet" data-role="slider">
-									<option value="off">No</option>
-									<option value="on">Yes</option>
-								</select>
+							<select name="favePet" id="favePet" data-role="slider">
+								<option value="off">No</option>
+								<option value="on">Yes</option>
+							</select>
 						</div>
 						
-						 <div data-role="fieldcontain">
+						<!-- <div data-role="fieldcontain">
 							<label for="birthDate">Date of Birth: *</label>
 							<br />
 							<input type="date" class="ignoreValidation" name="birthDate" id="birthDate" value="" />
-						</div>
+						</div>-->
 						
 						<div data-role="fieldcontain">
 							<label for="koolness">Koolness Factor:</label>
@@ -272,13 +261,17 @@ Class: ASD1210
 		<div data-role="content" id="petsForm" data-theme="b">
 		
 			<nav id="showLoseAdd">
+				<a href="#showItem" id="showJSON" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Show JSON Data</a>
+				<a href="#showItem" id="showXML" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Show XML Data</a>
+				<a href="#showItem" id="showCSV" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Show CSV Data</a>
+				<br />
 				<a href="#showItem" id="showData" style="display:none;" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Show KoolPets</a> 
 				<a href="#addItem" id="clearData" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Release all KoolPets</a> 
 				<a href="#addItem" id="addNew" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Add New KoolPet</a>
 			</nav>
 			<br />
 			<!-- This is where the list of pets will appear. -->
-			<div id="items" class="itemlist" data-theme="b">
+			<div id="divitems" class="itemlist" data-theme="b">
 			
 				<div id="searchPets" data-theme="a">
 					<!-- Live text search from "http://www.designchemical.com/blog/index.php/jquery/live-text-search-function-using-jquery/" -->
@@ -289,6 +282,10 @@ Class: ASD1210
 						</fieldset>
 					</form>
 				</div> <!-- end searchPets -->
+			
+				<ul id="items" class="itemlist" data-role="listview" data-theme="b">
+				
+				</ul>
 			
 			</div> <!-- end items -->
 			
