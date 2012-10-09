@@ -504,7 +504,7 @@ $('#showJSON').on('click', function() {
 		dataType	: 'json',
 		success		: function(data) {
 			$('#items').empty();
-			for(var i=0, i=data.pets.length; i++){
+			for(var i=0, j=data.pets.length; i<j; i++){
 				var pet = data.pets[i];
 				$('' +
 					'<div class="jpets">' +
@@ -524,8 +524,9 @@ $('#showJSON').on('click', function() {
 		error: function(data) {
 			console.log(showJSON);
 		}
-		$('#items').listview('refresh');
+		
     });
+    $('#items').listview('refresh');
 }); // end showjson function
 
 // Function to call the XML data.
@@ -556,8 +557,9 @@ $('#showXML').on('click', function() {
 		error: function(data) {
 			console.log(showXML);
 		}
-		$('#items').listview('refresh');
+		
 	});
+	$('#items').listview('refresh');
 }); // end showxml function
 
 // Function to call the CSV data.
@@ -588,8 +590,9 @@ $('#showCSV').on('click', function() {
 		error: function(data) {
 			console.log(showCSV);
 		}
-		$('#items').listview('refresh');
+		
 	});
+	$('#items').listview('refresh');
 }); // end showcsv function
 
 // This is to get images for the correct category.
@@ -603,58 +606,11 @@ $('#showCSV').on('click', function() {
 
 }); // End code for page.
 
-
-$("#info").on("pageinit", function(){
-	// Page code goes here.
-	$("header nav")
-		.slideDown()
-	;
-	
-var changePage = function(pageId) {
-	$('#' + pageId).trigger('pageinit');
-	$.mobile.changePage($('#' + pageId), {transition:"slide"});
-};
-
-}); // End code for page.
-
-
-$("#news").on("pageinit", function(){
-	// Page code goes here.
-	$("header nav")
-		.slideDown()
-	;
-	
-var changePage = function(pageId) {
-	$('#' + pageId).trigger('pageinit');
-	$.mobile.changePage($('#' + pageId), {transition:"slide"});
-};
-
-}); // End code for page.
-
-
-$("#cs").on("pageinit", function(){
-	// Page code goes here.
-	$("header nav")
-		.slideDown()
-	;
+$("header nav")
+	.slideDown()
+;
 
 var changePage = function(pageId) {
 	$('#' + pageId).trigger('pageinit');
 	$.mobile.changePage($('#' + pageId), {transition:"slide"});
 };
-
-}); // End code for page.
-
-
-$("#addItemErrors").on("pageinit", function(){
-	// Page code goes here.
-	$("header nav")
-		.slideDown()
-	;
-
-var changePage = function(pageId) {
-	$('#' + pageId).trigger('pageinit');
-	$.mobile.changePage($('#' + pageId), {transition:"slide"});
-};
-
-}); // End code for page.
