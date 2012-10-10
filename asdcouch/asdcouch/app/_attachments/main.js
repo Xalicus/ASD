@@ -12,25 +12,30 @@ $('#addItem').on('pageinit', function(){
 $('#showItem').on('pageinit', function () {
 	console.log('Hello World!');
 	$.ajax({
-		"url"		: '_view/pets',
+		"url"		: '/asd1210/_all_docs?include_docs=true&startkey="pets:"&endkey="pets:zzzzz"',
+		//"url"		: '_view/pets', // It doesn't work right.
 		"type"		: 'GET',
 		"dataType"	: 'json',
 		"success"	: function(data) {
 			console.log(data)
-			$('#items').empty();
+			$('#petList').empty();
 			$.each(data.rows, function(index, pets){
-				var name	= pets.value.petName;
-				var group	= pets.value.petGroups;
-				var gender	= pets.value.genderValue;
-				var fave	= pets.value.favePet;
-				var kool	= pets.value.koolness;
-				var com		= pets.value.comments;
+				var name	= pets.doc.petName;
+				var group	= pets.doc.petGroups;
+				var gender	= pets.doc.genderValue;
+				var fave	= pets.doc.favePet;
+				var kool	= pets.doc.koolness;
+				var com		= pets.doc.comments;
 				$('#petList').append(
-					$('li').text(name)
+					$('<li>').append(
+						$('<a>').attr("href", "#")
+							.text(name)
+					)
 				);
-				console.log(pets);
+				//console.log(pets);
 				
 			});
+			$('#petList').listview('refresh');
 			
 			/*for(var i=0, j=data.pets.length; i<j; i++){
 				var pet = data.pets[i];
