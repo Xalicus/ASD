@@ -497,112 +497,109 @@ $("#filter").keyup(function(){
 }; // end search function
 
 // Function to call the JSON data.
-$('#showJSON').on('click', function() {
-	$.ajax({
-		url			: 'data/data.json',
-		type		: 'GET',
-		dataType	: 'json',
-		success		: function(data) {
-			$('#items').empty();
-			for(var i=0, j=data.pets.length; i<j; i++){
-				var pet = data.pets[i];
-				$('' +
-					'<div class="jpets">' +
-						getImg(object.petGroups[1], makeSubList) +
-						'<h2>'+ pet.petName +'</h2>' +
-						'<p>'+ pet.petGroups +'</p>' +
-						'<p>'+ pet.genderValue +'</p>' +
-						'<p>'+ pet.favePet +'</p>' +
-						'<p>'+ pet.koolness +'</p>' +
-						'<p>'+ pet.comments +'</p>' +
-					'</div>'
-				).appendTo('#items');
-			};
-			console.log(data);
-			changePage();
-		},
-		error: function(data) {
-			console.log(showJSON);
-		}
-		
-    });
-    $('#items').listview('refresh');
-}); // end showjson function
+$.ajax({
+	"url"			: 'data/data.json',
+	"type"			: 'GET',
+	"dataType"		: 'json',
+	"success"		: function(data) {
+		$('#items').empty();
+		for(var i=0, j=data.pets.length; i<j; i++){
+			var pet = data.pets[i];
+			$('' +
+				'<div class="jpets">' +
+					getImg(object.petGroups[1]) +
+					'<h2>'+ pet.petName +'</h2>' +
+					'<p>'+ pet.petGroups +'</p>' +
+					'<p>'+ pet.genderValue +'</p>' +
+					'<p>'+ pet.favePet +'</p>' +
+					'<p>'+ pet.koolness +'</p>' +
+					'<p>'+ pet.comments +'</p>' +
+				'</div>'
+			).appendTo('#items');
+		};
+		console.log(data);
+		changePage();
+		$('#items').listview('refresh');
+	},
+	error: function(data) {
+		console.log(data);
+	}
+	
+});
+ // end showjson function
 
 // Function to call the XML data.
-$('#showXML').on('click', function() {
-	$.ajax({
-		url			: 'data/data.xml',
-		type		: 'GET',
-		dataType 	: 'xml',
-		success		: function(data) {
-			$('#items').empty();
-			for(var i=0, j=data.pets.length; i<j; i++){
-				var pet = data.pets[i];
-				$(''+
-					'<div class="xpets">'+
-						getImg(object.petGroups[1], makeSubList) +
-						'<h2>'+ pet.petName +'</h2>'+
-						'<p>'+ pet.petGroups +'</p>'+
-						'<p>'+ pet.genderValue +'</p>'+
-						'<p>'+ pet.favePet +'</p>'+
-						'<p>'+ pet.koolness +'</p>'+
-						'<p>'+ pet.comments +'</p>'+
-					'</div>'
-				).appendTo('#items');
-			};
-			console.log(data.pets);
-			changePage();
-		},
-		error: function(data) {
-			console.log(showXML);
-		}
-		
-	});
-	$('#items').listview('refresh');
-}); // end showxml function
+$.ajax({
+	"url"			: 'data/data.xml',
+	"type"			: 'GET',
+	"dataType"	 	: 'xml',
+	"success"		: function(pets) {
+		$('#items').empty();
+		for(var i=0, j=pets.pet.length; i<j; i++){
+			var pet = pets.pet[i];
+			$(''+
+				'<div class="xpets">'+
+					getImg(object.petGroups[1], makeSubList) +
+					'<h2>'+ pet.petName +'</h2>'+
+					'<p>'+ pet.petGroups +'</p>'+
+					'<p>'+ pet.genderValue +'</p>'+
+					'<p>'+ pet.favePet +'</p>'+
+					'<p>'+ pet.koolness +'</p>'+
+					'<p>'+ pet.comments +'</p>'+
+				'</div>'
+			).appendTo('#items');
+		};
+		console.log(pets.pet);
+		changePage();
+		$('#items').listview('refresh');
+	},
+	error: function(pets) {
+		console.log(pets.pet);
+	}
+	
+});
+ // end showxml function
 
 // Function to call the CSV data.
-$('#showCSV').on('click', function() {
-	$.ajax({
-		url			: 'data/data.csv',
-		type		: 'GET',
-		dataType	: 'csv',
-		success		: function(data) {
-			$('#items').empty();
-			for(var i=0, j=data.pets.length; i<j; i++){
-				var pet = data.pets[i];
-				$(''+
-					'<div class="cpets">'+
-						getImg(object.petGroups[1], makeSubList) +
-						'<h2>'+ pet.petName +'</h2>'+
-						'<p>'+ pet.petGroups +'</p>'+
-						'<p>'+ pet.genderValue +'</p>'+
-						'<p>'+ pet.favePet +'</p>'+
-						'<p>'+ pet.koolness +'</p>'+
-						'<p>'+ pet.comments +'</p>'+
-					'</div>'
-				).appendTo('#items');
-			};
-			console.log(data);
-			changePage();
-		},
-		error: function(data) {
-			console.log(showCSV);
-		}
-		
-	});
-	$('#items').listview('refresh');
-}); // end showcsv function
+$.ajax({
+	"url"			: 'data/data.csv',
+	"type"			: 'GET',
+	"dataType"		: 'csv',
+	"success"		: function(data) {
+		$('#items').empty();
+		for(var i=0, j=data.pets.length; i<j; i++){
+			var pet = data.pets[i];
+			$(''+
+				'<div class="cpets">'+
+					getImg(object.petGroups[1], makeSubList) +
+					'<h2>'+ pet.petName +'</h2>'+
+					'<p>'+ pet.petGroups +'</p>'+
+					'<p>'+ pet.genderValue +'</p>'+
+					'<p>'+ pet.favePet +'</p>'+
+					'<p>'+ pet.koolness +'</p>'+
+					'<p>'+ pet.comments +'</p>'+
+				'</div>'
+			).appendTo('#items');
+		};
+		console.log(data);
+		changePage();
+		$('#items').listview('refresh');
+	},
+	error: function(data) {
+		console.log(data);
+	}
+	
+});
+ // end showcsv function
 
 // This is to get images for the correct category.
-	var getImg = function(catName, makeSubList) {
-		var imgLi = $('div');
-		makeSubList.appendTo(imgLi);
-		var newImg = $('img');
-		var setSrc = newImg.attr("src", "images/" + catName + ".png");
-		imgLi.appendTo(newImg);
-	};
+var getImg = function(catName, makeSubList) {
+	var imgLi = $('div');
+	makeSubList.appendTo(imgLi);
+	var newImg = $('img');
+	var setSrc = newImg.attr("src", "images/" + catName + ".png");
+	imgLi.appendTo(newImg);
+};
 
 }); // End code for page.
 
