@@ -1,10 +1,10 @@
 $("#home").on("pageinit", function(){
-	console.log('I am ready');
+	
 
 }); // End code for home page.
 
 $('#addItem').on('pageinit', function(){
-	console.log('Get ready for this!');
+	
 
 	
 }); // End code for add item page.
