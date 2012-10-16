@@ -43,7 +43,8 @@ $('#addItem').on('pageinit', function(){
 				var data = myForm.serializeArray();
 					storeData(key);
 			}
-			
+		});
+		
 		var toggleControls = function(n) {
 			switch(n) {
 				case "on":
@@ -70,8 +71,9 @@ $('#addItem').on('pageinit', function(){
 					return false;
 			};
 		};
+		
 		// My storeData function
-		var storeData = function(key){
+		/*var storeData = function(key){
 			// If there isn't a key, this means this is a brand new item and we need a new key.
 			if (!key) {
 				var id				= Math.floor(Math.random()*10000001);
@@ -97,7 +99,7 @@ $('#addItem').on('pageinit', function(){
 			console.log(key.val());
 			changePage();
 			alert("Pet saved to the KoolPetsDex!");
-		};
+		};*/
 
 		// My Make Item Links Function
 		// Create the edit and delete links for each stored item when displayed.

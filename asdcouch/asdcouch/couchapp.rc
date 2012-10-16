@@ -1,10 +1,10 @@
 {
   "env": {
     "local": {
-      "db": "http://127.0.0.1:5984/asd1210"
+      "db": "http\/\/127.0.0.1:5984\/asd1210"
     },
     "cloudant": {
-      "db": "https://chesquallentlyingerissio:3KYlTk87V0uCxqd3kyjcplcJ@xalicus.cloudant.com/asd1210"
+      "db": "https:\/\/chesquallentlyingerissio:3KYlTk87V0uCxqd3kyjcplcJ@xalicus.cloudant.com\/asd1210"
     }
   }
 }
