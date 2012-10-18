@@ -45,7 +45,7 @@ $('#addItem').on('pageinit', function(){
 			}
 		});
 		
-		var toggleControls = function(n) {
+		/*var toggleControls = function(n) {
 			switch(n) {
 				case "on":
 					$("#petForm").style.display = "none";
@@ -70,7 +70,7 @@ $('#addItem').on('pageinit', function(){
 				default:
 					return false;
 			};
-		};
+		};*/
 		
 		// My storeData function
 		/*var storeData = function(key){
@@ -253,14 +253,15 @@ $('#showItem').on('pageinit', function () {
 	
 	
 	$.ajax({
-		"url"		: '/asd1210/_all_docs?include_docs=true&startkey="pets:"&endkey="pets:zzzzz"',
-		//"url"		: '_view/pets', // It doesn't work right.
+		//"url"		: '/asd1210/_all_docs?include_docs=true&startkey="pets:"&endkey="pets:zzzzz"',
+		"url"		: '_view/pets', // It doesn't work right.
 		"type"		: 'GET',
 		"dataType"	: 'json',
 		"success"	: function(data) {
 			console.log(data)
 			$('#petList').empty();
-			$.each(data.rows, function(index, pets){
+			// This one is for the _all_docs one.
+			/*$.each(data.rows, function(index, pets){
 				var name	= pets.doc.petName;
 				var group	= pets.doc.petGroups;
 				var gender	= pets.doc.genderValue;
@@ -275,12 +276,30 @@ $('#showItem').on('pageinit', function () {
 				);
 				//console.log(pets);
 				
+			});*/
+			// This one is for the _view/pets one.
+			$.each(data.rows, function(index, pets){
+				var name	= pets.value.petName;
+				var group	= pets.value.petGroups;
+				var gender	= pets.value.genderValue;
+				var fave	= pets.value.favePet;
+				var kool	= pets.value.koolness;
+				var com		= pets.value.comments;
+				$('#petList').append(
+					$('<li>').append(
+						$('<a>').attr("href", "#addItem")
+							.text("Name: " + name() + " Group: " + group())
+					)
+				);
+				console.log(pets);
+				
 			});
 			$('#petList').listview('refresh');
 			
 		},
 		"error": function(data) {
 			console.log(data);
+			console.log("Errors suck.");
 		}
 		
 	});
