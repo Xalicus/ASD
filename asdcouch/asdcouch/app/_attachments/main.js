@@ -153,7 +153,7 @@ $('#addItem').on('pageshow', function(){
 			var item = JSON.parse(value);
 			
 			// To show the form again
-			toggleControls("off");
+			//toggleControls("off");
 			
 			// Populate the form fields with current localStorage values.
 			if (item.kool1[1] == "On") {
@@ -270,10 +270,10 @@ $('#showItem').on('pageshow', function () {
 	
 	$.couch.db("asd1210").view("petsdex/pets", {
 		success: function(data) {
-			//console.log(data);
+			console.log(data);
 			$('#petList').empty();
-			$.each(data.rows, function(index, value) {
-				var item = (value.value || value.doc);
+			$.each(data.rows, function(index, pet) {
+				var item = (pet.value || pet.doc);
 				$('#petList').append(
 					$('<li>').append(
 						$('<a>')
