@@ -1,4 +1,4 @@
-$("#home").on("pageshow", function() {
+$('#home').on("pageshow", function() {
 	/*$.couch.db("asd1210").view("petsdex/pets", {
 		success: function(data) {
 			//console.log(data);
@@ -19,7 +19,42 @@ $("#home").on("pageshow", function() {
 
 }); // End code for home page.
 
-$('#addItem').on('pageshow', function(){
+$('#addItem').on("pageshow", function(){
+	
+	$.couch.db("asd1210").saveDoc("petsdex/pets", {
+	    success: function(data) {
+	        console.log(data);
+	        $.each(data.rows, function(index, pet) {
+	        	var petValue = (pet.value || pet.doc);
+	        	
+	        });
+	        $('#petForm').form('refresh');
+	    },
+	    error: function(status) {
+	        console.log(status);
+	        
+	    }
+	});
+	
+	$.couch.db("asd1210").view("petsdex/pets", {
+		success: function(data) {
+			console.log(data);
+			$('#petList').empty();
+			$.each(data.rows, function(index, pet) {
+				var item = (pet.value || pet.doc);
+				$('#petList').append(
+					$('<li>').append(
+						$('<a>')
+							.attr("href", "pets.html?program=" + item.groups)
+							.text(item.petName + item.petGroups)
+					)
+				);
+			});
+			$('#petList').listview('refresh');
+		}
+	});
+	
+	
 	$('#petsForm div').on('click', function(e){
 		console.log(e);
 	});
@@ -33,9 +68,6 @@ $('#addItem').on('pageshow', function(){
 	$('#comments').on('click', function() {
 		$('#comments').val("");
 	});
-	/*$('#comments').focusout('click', function() {
-		$('#comments').val("You no enter comment! You die now! KAMEHAMEHA!!!");
-	});*/
 
 	var myForm = $('#petForm'),
 		aierrorsLink = $('#aierrorsLink')
@@ -60,33 +92,6 @@ $('#addItem').on('pageshow', function(){
 					storeData(key);
 			}
 		});
-		
-		/*var toggleControls = function(n) {
-			switch(n) {
-				case "on":
-					$("#petForm").style.display = "none";
-					$("#clearData").style.display = "inline";
-					$("#showData").style.display = "none";
-					$("#addNew").style.display = "inline";
-					$("#showJSON").style.display = "inline";
-					$("#showXML").style.display = "inline";
-					$("#showCSV").style.display = "inline";
-					$("#items").style.display = "inline";
-					break;
-				case "off":
-					$("#petForm").style.display = "block";
-					$("#clearData").style.display = "inline";
-					$("#showData").style.display = "inline";
-					$("#addNew").style.display = "none";
-					$("#showJSON").style.display = "inline";
-					$("#showXML").style.display = "inline";
-					$("#showCSV").style.display = "inline";
-					$("#items").style.display = "none";
-					break;
-				default:
-					return false;
-			};
-		};*/
 		
 		// My storeData function
 		/*var storeData = function(key){
@@ -225,7 +230,7 @@ $('#addItem').on('pageshow', function(){
 	
 }); // End code for add item page.
 
-$('#showItem').on('pageshow', function () {
+$('#showItem').on("pageshow", function () {
 	console.log('Hello World!');
 
 	var search = function() {
@@ -277,7 +282,7 @@ $('#showItem').on('pageshow', function () {
 				$('#petList').append(
 					$('<li>').append(
 						$('<a>')
-							.attr("href", "#showItem?program=" + item.groups)
+							.attr("href", "pets.html?program=" + item.groups)
 							.text(item.petName + item.petGroups)
 					)
 				);
@@ -342,4 +347,32 @@ $('#showItem').on('pageshow', function () {
 		
 	});*/
 	
-});
+});	// End code for show item page.
+
+var urlVars = function() {
+	var urlData = $($.mobile.activePage).data("url");
+	var urlParts = urlData.split('?');
+	var urlPairs = urlParts[1].split('&');
+	var urlValues = {};
+	for (var pair in urlPairs) {
+		var keyValue = urlPairs[pair].split('=');
+		var key = decodeURIComponent(keyValue[0]);
+		var value = decodeURIComponent(keyValue[1]);
+		urlValues[key] = value;
+	}
+	return urlValues;
+};
+
+$('#showPets').on("pageshow", function () {
+	var pets = urlVars()["group"];
+	console.log(pets);
+	$.couch.db("asd1210").view("petsdex/petGroups", {
+		key: "pets: " + pets
+	});
+	
+});	// End code for show pets page.
+
+
+
+
+

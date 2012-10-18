@@ -6,32 +6,8 @@ Class: ASD1210
 
 <html lang="en">
 <head>
-
 	<meta charset="utf-8">
-	<meta name="description" content="Kev's KoolPetsDex Mobile Web App." />
-	<meta name="keywords" content="html5, mobile development, Full Sail University, pets, apps" />
-		
 	<title>Kev's KoolPetsDex</title>
-	
-	<!--  Mobile viewport optimized: j.mp/bplateviewport -->
-	<meta name="HandheldFriendly" content="True">
-	<meta name="MobileOptimized" content="320"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<!-- Mobile IE needs ClearType for smoothing fonts -->
-	<meta http-equiv="cleartype" content="on">
-	
-	<!-- StyleSheets under here -->
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
-	<link rel="stylesheet" type="text/css" href="main.css" />
-	
-	<!-- JavaScript is normally at the end of the body, except for Modernizr which enables HTML5 elements & feature detects -->
-	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
-	<script src="jquery.validate.min.js" type="text/javascript"></script>
-	<script src="modernizr.custom.min.js" type="text/javascript"></script>
-	<script src="jquery.couch.js"></script>
-
 </head>
 <body>
 	<!-- Pets Home Page -->
@@ -39,43 +15,24 @@ Class: ASD1210
 		<header data-role="header" data-theme="b">
 			<nav id="addPetFeature">
 				<h2><a href="index.html#home"><img src="img.png" width="40" height="50" title="My Joker Face." /></a>
-				Show KoolPets!</h2>
+				KoolPetsDex Rocks!</h2>
 			</nav>
 		</header> <!-- end header -->
 		<!-- Main body of page -->
 		<div data-role="content" id="petsearchbrowse" data-theme="b">
 		
 			<div id="browsePets">
-				<a href="#showItem" id="showPet" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true">Show KoolPets</a>
+				<a href="index.html#showItem" id="showPet" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true">Show KoolPets</a>
 			</div>
 		</div> <!-- end content -->
 		
 		<div data-role="content" id="petsForm" data-theme="b">
-		
-			<nav id="showLoseAdd">
-				<a href="#addItem" id="clearData" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Release all KoolPets</a> 
-				<a href="#addItem" id="addNew" data-role="button" data-mini="true" data-inline="true" data-ajax="false" rel="external">Add New KoolPet</a>
-			</nav>
-			<br />
 			<!-- This is where the list of pets will appear. -->
 			<div id="divitems" class="itemlist" data-theme="b">
 				
-				<div id="searchPets" data-theme="a">
-					<!-- Live text search from "http://www.designchemical.com/blog/index.php/jquery/live-text-search-function-using-jquery/" -->
-					<form id="live-search" action="" class="styled" method="post">
-						<fieldset>
-							<input type="text" class="text-input" id="filter" value="" data-mini="true" />
-							<span id="filter-count"></span>
-						</fieldset>
-					</form>
-				</div> <!-- end searchPets -->
-				
 				<br />
-				
 				<ul id="petList" data-role="listview" data-theme="b">
-				
 				</ul>
-				
 				<br />
 			
 			</div> <!-- end items -->
@@ -86,10 +43,10 @@ Class: ASD1210
 			<nav id="navi">
 			<div data-role="navbar" data-theme="b">
 				<ul>
-					<li><a href="#home" data-role="button" data-ajax="false">Home</a></li>
-					<li><a href="#addItem" data-role="button" data-ajax="false" class="ui-btn-active ui-state-persist">Add Pet</a></li>
-					<li><a href="#info" data-role="button" data-ajax="false">About Me</a></li>
-					<li><a href="#news" data-role="button" data-ajax="false">News</a></li>
+					<li><a href="index.html#home" data-role="button" data-ajax="false">Home</a></li>
+					<li><a href="index.html#addItem" data-role="button" data-ajax="false" class="ui-btn-active ui-state-persist">Add Pet</a></li>
+					<li><a href="index.html#info" data-role="button" data-ajax="false">About Me</a></li>
+					<li><a href="index.html#news" data-role="button" data-ajax="false">News</a></li>
 				</ul>
 			</div><!-- /navbar -->
 			<small>&copy; 2012 Kevin Ward, All Rights Reserved.</small>
@@ -98,11 +55,6 @@ Class: ASD1210
 		
 	</div>
 	<!-- End Home Page -->
-
-	<!-- JavaScript under here -->
-	
-	<script src="main.js" type="text/javascript"></script>
-
 	
 </body>
 </html>
