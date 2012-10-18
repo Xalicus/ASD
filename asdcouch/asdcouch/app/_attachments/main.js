@@ -1,9 +1,25 @@
-$("#home").on("pageinit", function(){
-	
+$("#home").on("pageshow", function() {
+	/*$.couch.db("asd1210").view("petsdex/pets", {
+		success: function(data) {
+			//console.log(data);
+			$('#homeItems').empty();
+			$.each(data.rows, function(index, value) {
+				var item = (value.value || value.doc);
+				$('#homeItems').append(
+					$('<li>').append(
+						$('<a>')
+							.attr("href", "program.html")
+							.text(item.title)
+					)
+				);
+			});
+			$('#homeItems').listview('refresh');
+		}
+	});*/
 
 }); // End code for home page.
 
-$('#addItem').on('pageinit', function(){
+$('#addItem').on('pageshow', function(){
 	$('#petsForm div').on('click', function(e){
 		console.log(e);
 	});
@@ -209,7 +225,7 @@ $('#addItem').on('pageinit', function(){
 	
 }); // End code for add item page.
 
-$('#showItem').on('pageinit', function () {
+$('#showItem').on('pageshow', function () {
 	console.log('Hello World!');
 
 	var search = function() {
@@ -252,16 +268,36 @@ $('#showItem').on('pageinit', function () {
 	}; // end search function
 	
 	
-	$.ajax({
-		//"url"		: '/asd1210/_all_docs?include_docs=true&startkey="pets:"&endkey="pets:zzzzz"',
-		"url"		: '_view/pets', // It doesn't work right.
+	$.couch.db("asd1210").view("petsdex/pets", {
+		success: function(data) {
+			//console.log(data);
+			$('#petList').empty();
+			$.each(data.rows, function(index, value) {
+				var item = (value.value || value.doc);
+				$('#petList').append(
+					$('<li>').append(
+						$('<a>')
+							.attr("href", "#showItem?program=" + item.groups)
+							.text(item.petName + item.petGroups)
+					)
+				);
+			});
+			$('#petList').listview('refresh');
+		}
+	});
+	
+	
+	// Old ajax code, that we don't need to call anymore.
+	/*$.ajax({
+		"url"		: '/asd1210/_all_docs?include_docs=true&startkey="pets:"&endkey="pets:zzzzz"',
+		//"url"		: '_view/pets', // It doesn't work right.
 		"type"		: 'GET',
 		"dataType"	: 'json',
 		"success"	: function(data) {
-			console.log(data)
+			//console.log(data)
 			$('#petList').empty();
 			// This one is for the _all_docs one.
-			/*$.each(data.rows, function(index, pets){
+			$.each(data.rows, function(index, pets){
 				var name	= pets.doc.petName;
 				var group	= pets.doc.petGroups;
 				var gender	= pets.doc.genderValue;
@@ -270,31 +306,33 @@ $('#showItem').on('pageinit', function () {
 				var com		= pets.doc.comments;
 				$('#petList').append(
 					$('<li>').append(
-						$('<a>').attr("href", "#")
-							.text(name)
+						$('<a>').attr("href", "#showItem")
+							.text("Name: " + name + " Group: " + group)
 					)
 				);
 				//console.log(pets);
 				
-			});*/
-			// This one is for the _view/pets one.
-			$.each(data.rows, function(index, pets){
-				var name	= pets.value.petName;
-				var group	= pets.value.petGroups;
-				var gender	= pets.value.genderValue;
-				var fave	= pets.value.favePet;
-				var kool	= pets.value.koolness;
-				var com		= pets.value.comments;
-				$('#petList').append(
-					$('<li>').append(
-						$('<a>').attr("href", "#addItem")
-							.text("Name: " + name() + " Group: " + group())
-					)
-				);
-				console.log(pets);
-				
 			});
-			$('#petList').listview('refresh');
+			
+			
+			// This one is for the _view/pets one.
+			//$.each(data.rows, function(index, pets){
+			//	var name	= pets.value.petName;
+			//	var group	= pets.value.petGroups;
+			//	var gender	= pets.value.genderValue;
+			//	var fave	= pets.value.favePet;
+			//	var kool	= pets.value.koolness;
+			//	var com		= pets.value.comments;
+			//	$('#petList').append(
+			//		$('<li>').append(
+			//			$('<a>').attr("href", "#addItem")
+			//				.text("Name: " + name + " Group: " + group)
+			//		)
+			//	);
+			//	console.log(pets);
+			//	
+			//});
+			//$('#petList').listview('refresh');
 			
 		},
 		"error": function(data) {
@@ -302,6 +340,6 @@ $('#showItem').on('pageinit', function () {
 			console.log("Errors suck.");
 		}
 		
-	});
+	});*/
 	
 });
