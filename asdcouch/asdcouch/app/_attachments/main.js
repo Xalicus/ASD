@@ -45,8 +45,8 @@ $('#addItem').on("pageshow", function(){
 				$('#petList').append(
 					$('<li>').append(
 						$('<a>')
-							.attr("href", "pets.html?program=" + item.groups)
-							.text(item.petName + item.petGroups)
+							.attr("href", "pets.html?program=" + item.koolPet_Groups)
+							.text(item.koolPet_Name + " in " + item.koolPet_Groups)
 					)
 				);
 			});
@@ -282,8 +282,8 @@ $('#showItem').on("pageshow", function () {
 				$('#petList').append(
 					$('<li>').append(
 						$('<a>')
-							.attr("href", "pets.html?program=" + item.groups)
-							.text(item.petName + item.petGroups)
+							.attr("href", "pets.html?program=" + item.koolPet_Groups)
+							.text("Name: " + item.koolPet_Name + " in " + "Group: " + item.koolPet_Groups)
 					)
 				);
 			});
